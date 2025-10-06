@@ -49,6 +49,9 @@
             }
           }
         },
+        "policies": {
+          "inbound": ["api-key-inbound"]
+        },
         "operationId": "1e0edd2a-8d53-4355-805f-54b7e5555725",
         "x-zuplo-route": {
           "corsPolicy": "none",

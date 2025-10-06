@@ -1,0 +1,11 @@
+{
+  "enableAuthentication": true,
+  "requireAuthentication": false,
+  "apis": [
+    {
+      "name": "9squid API",
+      "path": "/routes.oas.json",
+      "showInSidebar": true
+    }
+  ]
+}

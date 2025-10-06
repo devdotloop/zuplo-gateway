@@ -4,7 +4,9 @@
       "handler": {
         "export": "MockApiInboundPolicy",
         "module": "$import(@zuplo/runtime)",
-        "options": {}
+        "options": {
+          "allowUnauthenticatedRequests": false
+        }
       },
       "name": "mock-api-inbound",
       "policyType": "mock-api-inbound"
