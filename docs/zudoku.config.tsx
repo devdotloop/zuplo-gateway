@@ -69,7 +69,7 @@ const config: ZudokuConfig = {
   apis: [
     {
       type: "file",
-      input: "../config/routes.oas.json",
+      input: "../config/swagger.json",
       path: "api",
     },
   ],
