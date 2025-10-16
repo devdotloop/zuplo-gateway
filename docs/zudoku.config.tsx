@@ -84,6 +84,18 @@ const config: ZudokuConfig = {
   },
   apiKeys: {
     enabled: true,
+       createKey: async ({ apiKey, context, auth }) => {
+        const newKey = {
+          id: crypto.randomUUID(),
+          key: `key-${crypto.randomUUID()}`,
+          description: apiKey.description,
+          createdOn: new Date().toISOString(),
+          expiresOn: apiKey.expiresOn,
+        };
+      // Save the new key to your storage
+      // Associate it with the current user/consumer
+    },
+
   },
 };
 
