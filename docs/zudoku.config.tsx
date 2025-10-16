@@ -1,6 +1,5 @@
 import type { ZudokuConfig } from "zudoku";
 
-console.log('tester ', process.env.ZUDOKU_PUBLIC_CLERK_PUBLISHABLE_KEY);
 /**
  * Developer Portal Configuration
  * For more information, see:
