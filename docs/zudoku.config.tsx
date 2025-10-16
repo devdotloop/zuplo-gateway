@@ -1,5 +1,6 @@
 import type { ZudokuConfig } from "zudoku";
 
+console.log('tester ', process.env.ZUDOKU_PUBLIC_CLERK_PUBLISHABLE_KEY);
 /**
  * Developer Portal Configuration
  * For more information, see:
@@ -69,21 +70,17 @@ const config: ZudokuConfig = {
   apis: [
     {
       type: "file",
-      input: "../config/swagger.json",
+      input: "../config/routes.oas.json",
+      // input: "../config/swagger.json",
       path: "api",
     },
   ],
   authentication: {
-    // IMPORTANT: This is a demo Auth0 configuration.
-    // In a real application, you should replace these values with your own
-    // identity provider's configuration.
-    // This configuration WILL NOT WORK with custom domains.
-    // For more information, see:
-    // https://zuplo.com/docs/dev-portal/zudoku/configuration/authentication
-    type: "auth0",
-    domain: "auth.zuplo.site",
-    clientId: "f8I87rdsCRo4nU2FHf0fHVwA9P7xi7Ml",
-    audience: "https://api.example.com/",
+    type: "clerk",
+    // Use environment variables
+    clerkPubKey: process.env.ZUDOKU_PUBLIC_CLERK_PUBLISHABLE_KEY! as `pk_test_${string}`,
+    jwtTemplateName: 'zuplo-api'
+    
   },
   apiKeys: {
     enabled: true,
