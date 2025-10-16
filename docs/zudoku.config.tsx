@@ -77,7 +77,7 @@ const config: ZudokuConfig = {
   authentication: {
     type: "clerk",
     // Use environment variables
-    clerkPubKey: process.env.ZUPLO_PUBLIC_CLERK_PUBLISHABLE_KEY! as `pk_test_${string}`,
+    clerkPubKey: 'pk_test_b3JnYW5pYy1nb3BoZXItNjAuY2xlcmsuYWNjb3VudHMuZGV2JA',//process.env.ZUPLO_PUBLIC_CLERK_PUBLISHABLE_KEY! as `pk_test_${string}`,
     jwtTemplateName: 'zuplo-api'
     
   },
