@@ -8,7 +8,7 @@ console.log('tester ', process.env.ZUDOKU_PUBLIC_CLERK_PUBLISHABLE_KEY);
  */
 const config: ZudokuConfig = {
   site: {
-    title: "My Developer Portal",
+    title: "9Squid Developer Portal",
     logo: {
       src: {
         light: "https://cdn.zuplo.com/assets/my-dev-portal-light.svg",
