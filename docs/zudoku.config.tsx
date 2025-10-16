@@ -84,7 +84,13 @@ const config: ZudokuConfig = {
   },
   apiKeys: {
     enabled: true,
-       createKey: async ({ apiKey, context, auth }) => {
+      // Retrieve all API consumers and their keys
+      getKeys: async (context) => {
+        // Implement fetching consumers from your storage
+        // Each consumer can have multiple API keys
+        return [];
+      },
+      createKey: async ({ apiKey, context, auth }) => {
         const newKey = {
           id: crypto.randomUUID(),
           key: `key-${crypto.randomUUID()}`,
