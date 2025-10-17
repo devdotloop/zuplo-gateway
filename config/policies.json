@@ -10,6 +10,19 @@
       },
       "name": "mock-api-inbound",
       "policyType": "mock-api-inbound"
+    },
+    {
+      "handler": {
+        "export": "OpenIdJwtInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "issuer": "https://organic-gopher-60.clerk.accounts.dev",
+          "audience": "https://your-api-audience.com",
+          "allowUnauthenticatedRequests": false
+        }
+      },
+      "name": "clerk-jwt-auth-inbound",
+      "policyType": "openid-jwt-auth-inbound"
     }
   ]
 }
