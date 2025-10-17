@@ -100,7 +100,119 @@ const config: ZudokuConfig = {
     //   // Save the new key to your storage
     //   // Associate it with the current user/consumer
     // },
+     createKey: async ({ apiKey, context, auth }) => {
+      const user = auth.profile;
+      if (!user) throw new Error("Not authenticated");
 
+      // Create consumer + key via Zuplo Developer API
+      const response = await fetch(
+        `https://dev.zuplo.com/v1/accounts/${process.env.ZUPLO_ACCOUNT_NAME}/key-buckets/${process.env.ZUPLO_BUCKET_NAME}/consumers?with-api-key=true`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.ZUPLO_DEVELOPER_API_KEY}`,
+          },
+          body: JSON.stringify({
+            name: user.name || user.email,
+            description: apiKey.description,
+            managers: [user.email],
+            metadata: {
+              userId: user.sub,
+              email: user.email,
+            },
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to create API key");
+      }
+
+      // Don't return anything - it expects void
+      // The new key will be fetched via getKeys on next load
+    },
+
+    // Fetch existing keys for logged-in user
+    // Note: getKeys should return a flat array of ApiKey[], not consumers
+    // This is a workaround since Zuplo API uses consumers
+    getKeys: async (context) => {
+      // We need to get user email somehow - context doesn't provide it directly
+      // This is a limitation of the simplified API
+      // For now, we'll need to rely on the authentication headers
+
+      const response = await fetch(
+        `https://dev.zuplo.com/v1/accounts/${process.env.ZUPLO_ACCOUNT_NAME}/key-buckets/${process.env.ZUPLO_BUCKET_NAME}/consumers?include-api-keys=true&key-format=visible`,
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.ZUPLO_DEVELOPER_API_KEY}`,
+          },
+        }
+      );
+
+      if (!response.ok) return [];
+
+      const consumers = await response.json();
+
+      // Flatten all keys from all consumers into a single array
+      const allKeys: any[] = [];
+      for (const consumer of consumers) {
+        if (consumer.apiKeys) {
+          for (const key of consumer.apiKeys) {
+            allKeys.push({
+              id: `${consumer.id}:${key.id}`, // Encode both IDs for later use
+              key: key.key,
+              description: key.description || consumer.name,
+              createdOn: key.createdOn,
+              expiresOn: key.expiresOn,
+            });
+          }
+        }
+      }
+
+      return allKeys;
+    },
+
+    // Delete API key - Also returns void
+    // The id parameter is the combined "consumerId:keyId" string from getKeys
+    deleteKey: async (id, context) => {
+      const [consumerId, keyId] = id.split(':');
+      if (!consumerId || !keyId) {
+        throw new Error('Invalid key ID format');
+      }
+
+      await fetch(
+        `https://dev.zuplo.com/v1/accounts/${process.env.ZUPLO_ACCOUNT_NAME}/key-buckets/${process.env.ZUPLO_BUCKET_NAME}/consumers/${consumerId}/keys/${keyId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${process.env.ZUPLO_DEVELOPER_API_KEY}`,
+          },
+        }
+      );
+      // No return - void
+    },
+
+    // Roll (regenerate) API key - Also returns void
+    // The id parameter is the combined "consumerId:keyId" string from getKeys
+    rollKey: async (id, context) => {
+      const [consumerId] = id.split(':');
+      if (!consumerId) {
+        throw new Error('Invalid key ID format');
+      }
+
+      await fetch(
+        `https://dev.zuplo.com/v1/accounts/${process.env.ZUPLO_ACCOUNT_NAME}/key-buckets/${process.env.ZUPLO_BUCKET_NAME}/consumers/${consumerId}/keys/roll`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${process.env.ZUPLO_DEVELOPER_API_KEY}`,
+          },
+        }
+      );
+      // No return - void
+    },
+    
   },
 };
 
