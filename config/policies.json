@@ -18,7 +18,8 @@
         "options": {
           "issuer": "https://organic-gopher-60.clerk.accounts.dev",
           "jwkUrl": "https://organic-gopher-60.clerk.accounts.dev/.well-known/jwks.json",
-          "allowUnauthenticatedRequests": true
+          "audience": "https://nine-squid-main-8c41398.zuplo.app",
+          "allowUnauthenticatedRequests": false
         }
       },
       "name": "clerk-jwt-auth-inbound",
