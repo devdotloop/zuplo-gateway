@@ -323,16 +323,17 @@
         "summary": "Get onboarding data by originator ID",
         "tags": ["Originator Onboarding"],
         "x-zuplo-route": {
+          "corsPolicy": "none",
           "handler": {
-            "export": "urlRewriteHandler",
+            "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "rewritePattern": "https://api.9squid.com/api/v1/deals"
+              "baseUrl": "https://todo.zuplo.io"
             }
-          },
-          "policies": {
-            "inbound": ["api-key-inbound"]
           }
+        },
+        "policies": {
+          "inbound": ["api-key-inbound"]
         }
       }
     },
