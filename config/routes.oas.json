@@ -1,230 +1,410 @@
 {
-  "openapi": "3.1.0",
-  "info": {
-    "version": "1.0.0",
-    "title": "My Zuplo API"
-  },
+  "openapi": "3.0.0",
   "paths": {
-    "/todos": {
+    "/api/api": {
       "get": {
-        "summary": "Get all todos",
-        "description": "**Retrieves a complete list of all todo items** from the system. This endpoint returns all todos regardless of their completion status or owner, making it useful for displaying comprehensive todo lists or performing bulk operations.",
+        "operationId": "AppController_getHello",
+        "parameters": [],
         "responses": {
           "200": {
-            "description": "A list of todos",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Todo"
+            "description": ""
+          }
+        },
+        "tags": ["App"]
+      }
+    },
+    "/api/originator/clerk-id/{id}": {
+      "get": {
+        "operationId": "OriginatorController_getOriginatorByClerkId",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Clerk ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Originator retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get originator by Clerk ID",
+        "tags": ["Originator"]
+      }
+    },
+    "/api/originator/me": {
+      "get": {
+        "operationId": "OriginatorController_getMyOnboardingData",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Onboarding data retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get onboarding data for current originator",
+        "tags": ["Originator"]
+      }
+    },
+    "/api/originator/webhook/clerk": {
+      "post": {
+        "operationId": "OriginatorController_deleteUser",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "tags": ["Originator"]
+      }
+    },
+    "/api/originator/available-charter-numbers": {
+      "get": {
+        "operationId": "OriginatorController_getAvailableCharterNumbers",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Available charter numbers retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get all available charter numbers",
+        "tags": ["Originator"]
+      }
+    },
+    "/api/originator/{id}": {
+      "get": {
+        "operationId": "OriginatorController_getOriginatorById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Originator ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Originator retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get originator by ID",
+        "tags": ["Originator"]
+      }
+    },
+    "/api/originator/me/contact-info": {
+      "put": {
+        "operationId": "OriginatorController_updateContactInfo",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Contact information updated successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Update user contact information",
+        "tags": ["Originator"]
+      }
+    },
+    "/api/originator/onboarding/verify/league/access-code": {
+      "post": {
+        "operationId": "OnboardingController_verifyLeagueAccessCode",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "accessCode": {
+                    "type": "string",
+                    "example": "123456"
                   }
                 },
-                "examples": {
-                  "mixed_todos": {
-                    "summary": "A list of todos with different completion states",
-                    "value": [
-                      {
-                        "id": 1,
-                        "title": "Buy groceries",
-                        "completed": false,
-                        "userId": 123
-                      },
-                      {
-                        "id": 2,
-                        "title": "Write documentation",
-                        "completed": true,
-                        "userId": 456
-                      },
-                      {
-                        "id": 3,
-                        "title": "Review pull requests",
-                        "completed": false,
-                        "userId": 123
-                      }
-                    ]
-                  }
-                }
+                "required": ["accessCode"]
               }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Access code verified successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Verify league access code",
+        "tags": ["Originator Onboarding"]
+      }
+    },
+    "/api/originator/onboarding/charter-number/{id}": {
+      "get": {
+        "operationId": "OnboardingController_getCharterNumber",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Charter number ID",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Charter number retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get charter number",
+        "tags": ["Originator Onboarding"]
+      }
+    },
+    "/api/originator/onboarding": {
+      "post": {
+        "operationId": "OnboardingController_updateOnboarding",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "originatorId": {
+                    "type": "string",
+                    "example": "org_123"
+                  },
+                  "step": {
+                    "type": "number",
+                    "example": 2
+                  },
+                  "onboarding_data": {
+                    "type": "object",
+                    "example": {
+                      "key": "value"
+                    }
+                  },
+                  "is_submitted": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "example": ["file1.pdf", "file2.pdf"]
+                  },
+                  "originatorName": {
+                    "type": "string",
+                    "example": "Sample Originator"
+                  }
+                },
+                "required": ["originatorId", "step"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Onboarding step updated successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Update onboarding step",
+        "tags": ["Originator Onboarding"]
+      }
+    },
+    "/api/originator/onboarding/resend/league/invite": {
+      "post": {
+        "operationId": "OnboardingController_resendLeagueInvite",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "league_123"
+                  }
+                },
+                "required": ["id"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "League invite resent successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Resend league invite",
+        "tags": ["Originator Onboarding"]
+      }
+    },
+    "/api/originator/onboarding/{id}": {
+      "get": {
+        "operationId": "OnboardingController_getOnBoardingData",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Originator ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Onboarding data retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get onboarding data by originator ID",
+        "tags": ["Originator Onboarding"],
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "https://todo.zuplo.io"
             }
           }
         },
         "policies": {
           "inbound": ["api-key-inbound"]
-        },
-        "operationId": "1e0edd2a-8d53-4355-805f-54b7e5555725",
-        "x-zuplo-route": {
-          "corsPolicy": "none",
-          "handler": {
-            "export": "urlForwardHandler",
-            "module": "$import(@zuplo/runtime)",
-            "options": {
-              "baseUrl": "https://todo.zuplo.io"
-            }
-          }
-        },
-        "tags": ["Todo"]
-      },
-      "post": {
-        "summary": "Create a new todo",
-        "description": "**Creates a new todo item** with the provided details. The todo will be assigned a unique ID automatically and can include a title, completion status, and user association. This is the primary endpoint for adding new tasks to the system.",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateTodo"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Todo created successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Todo"
-                },
-                "examples": {
-                  "new_todo": {
-                    "summary": "A newly created todo",
-                    "value": {
-                      "id": 4,
-                      "title": "Deploy application",
-                      "completed": false,
-                      "userId": 789
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request body"
-          }
-        },
-        "operationId": "55ee860b-fe7e-4d66-a228-bb5320c3305d",
-        "x-zuplo-route": {
-          "corsPolicy": "none",
-          "handler": {
-            "export": "urlForwardHandler",
-            "module": "$import(@zuplo/runtime)",
-            "options": {
-              "baseUrl": "https://todo.zuplo.io"
-            }
-          }
-        },
-        "tags": ["Todo"]
+        }
       }
     },
-    "/todos/{id}": {
-      "put": {
-        "summary": "Update a todo",
-        "description": "**Updates an existing todo item** by its unique identifier. You can modify any combination of the todo's properties including title, completion status, and user assignment. All changes are applied atomically to ensure data consistency.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            },
-            "description": "The todo ID"
-          }
-        ],
+    "/api/originator/onboarding/upload-url": {
+      "post": {
+        "operationId": "OnboardingController_getUploadUrl",
+        "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateTodo"
+                "$ref": "#/components/schemas/GetUploadUrlDto"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Todo updated successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Todo"
-                },
-                "examples": {
-                  "updated_todo": {
-                    "summary": "A todo that has been updated",
-                    "value": {
-                      "id": 1,
-                      "title": "Buy groceries and cook dinner",
-                      "completed": true,
-                      "userId": 123
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request body"
-          },
-          "404": {
-            "description": "Todo not found"
+            "description": "Upload URL generated successfully"
           }
         },
-        "operationId": "4569a607-338e-4d66-80f7-17f911778b1d",
-        "x-zuplo-route": {
-          "corsPolicy": "none",
-          "handler": {
-            "export": "urlForwardHandler",
-            "module": "$import(@zuplo/runtime)",
-            "options": {
-              "baseUrl": "https://todo.zuplo.io"
-            }
+        "security": [
+          {
+            "clerk-token": []
           }
-        },
-        "tags": ["Todo"]
-      },
+        ],
+        "summary": "Get presigned URL for file upload",
+        "tags": ["Originator Onboarding"]
+      }
+    },
+    "/api/originator/admin/{id}": {
       "delete": {
-        "summary": "Delete a todo",
-        "description": "**Permanently removes a todo item** from the system using its unique identifier. This operation cannot be undone, so use with caution. The endpoint will return a 404 error if the specified todo does not exist.",
+        "operationId": "OriginatorAdminController_deleteOriginator",
         "parameters": [
           {
             "name": "id",
-            "in": "path",
             "required": true,
+            "in": "path",
+            "description": "Originator ID",
             "schema": {
-              "type": "integer"
-            },
-            "description": "The todo ID"
+              "type": "string"
+            }
           }
         ],
         "responses": {
-          "204": {
-            "description": "Todo deleted successfully"
-          },
-          "404": {
-            "description": "Todo not found"
+          "200": {
+            "description": "Originator deleted successfully"
           }
         },
-        "operationId": "888a8d15-aa30-45fe-8957-b07a8bcdd7ca",
-        "x-zuplo-route": {
-          "corsPolicy": "none",
-          "handler": {
-            "export": "urlForwardHandler",
-            "module": "$import(@zuplo/runtime)",
-            "options": {
-              "baseUrl": "https://todo.zuplo.io"
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Delete originator",
+        "tags": ["Originator - Admin"]
+      },
+      "put": {
+        "operationId": "OriginatorAdminController_updateOriginator",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Originator ID",
+            "schema": {
+              "type": "string"
             }
           }
-        },
-        "tags": ["Todo"]
-      }
-    },
-    "/api/create-api-key": {
-      "post": {
-        "summary": "Create API Key",
-        "description": "Create a new API key for the authenticated user",
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -233,105 +413,374 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "New Name"
                   },
-                  "description": {
-                    "type": "string"
+                  "leagueId": {
+                    "type": "string",
+                    "example": "league_123"
                   },
-                  "managers": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
+                  "onboardingData": {
+                    "type": "object",
+                    "example": {}
                   },
-                  "metadata": {
-                    "type": "object"
+                  "currentStep": {
+                    "type": "number",
+                    "example": 2
+                  },
+                  "isSubmitted": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "submissionId": {
+                    "type": "string",
+                    "example": "sub_123"
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "pending"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Originator updated successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Update originator",
+        "tags": ["Originator - Admin"]
+      }
+    },
+    "/api/originator/admin/invitation": {
+      "post": {
+        "operationId": "OriginatorAdminController_sendOriginatorInvitation",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "leagueId": {
+                    "type": "string",
+                    "example": "league_123"
+                  },
+                  "charterNumber": {
+                    "type": "string",
+                    "example": "CH12345"
+                  },
+                  "creditUnionName": {
+                    "type": "string",
+                    "example": "Example Credit Union"
+                  },
+                  "contactPerson": {
+                    "type": "string",
+                    "example": "John Doe"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "john.doe@example.com"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "example": "1234567890"
                   }
                 },
-                "required": ["name", "managers"]
+                "required": [
+                  "leagueId",
+                  "charterNumber",
+                  "creditUnionName",
+                  "contactPerson",
+                  "email",
+                  "phone"
+                ]
               }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "API key created successfully"
+            "description": "Invitation sent successfully"
           }
         },
-        "operationId": "create-api-key",
-        "x-zuplo-route": {
-          "corsPolicy": "none",
-          "handler": {
-            "export": "createApiKeyHandler",
-            "module": "$import(./modules/api-key-handlers)"
+        "security": [
+          {
+            "clerk-token": []
           }
-        },
-        "tags": ["API Keys"]
+        ],
+        "summary": "Send originator invitation",
+        "tags": ["Originator - Admin"]
       }
     },
-    "/api/get-api-keys": {
+    "/api/originator/admin/all": {
       "get": {
-        "summary": "Get API Keys",
-        "description": "Retrieve all API keys for the authenticated user",
-        "responses": {
-          "200": {
-            "description": "List of API keys"
-          }
-        },
-        "operationId": "get-api-keys",
-        "x-zuplo-route": {
-          "corsPolicy": "none",
-          "handler": {
-            "export": "getApiKeysHandler",
-            "module": "$import(./modules/api-key-handlers)"
-          }
-        },
-        "tags": ["API Keys"]
-      }
-    },
-    "/api/delete-api-key": {
-      "delete": {
-        "summary": "Delete API Key",
-        "description": "Delete an API key",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "consumerId": {
-                    "type": "string"
-                  },
-                  "keyId": {
-                    "type": "string"
-                  }
-                },
-                "required": ["consumerId", "keyId"]
-              }
+        "operationId": "OriginatorAdminController_getAllOriginators",
+        "parameters": [
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "Filter by status (NOT_SUBMITTED, PENDING_APPROVAL, ACCEPTED, CHANGE_REQUEST, REJECTED)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "description": "Search by credit union name or email",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Items per page",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number",
+            "schema": {
+              "type": "number"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
-            "description": "API key deleted successfully"
+            "description": "Originators retrieved successfully"
           }
         },
-        "operationId": "delete-api-key",
-        "x-zuplo-route": {
-          "corsPolicy": "none",
-          "handler": {
-            "export": "deleteApiKeyHandler",
-            "module": "$import(./modules/api-key-handlers)"
+        "security": [
+          {
+            "clerk-token": []
           }
-        },
-        "tags": ["API Keys"]
+        ],
+        "summary": "Get all originators",
+        "tags": ["Originator - Admin"]
       }
     },
-    "/api/roll-api-key": {
+    "/api/originator/admin/bulk/invitation": {
       "post": {
-        "summary": "Roll API Key",
-        "description": "Regenerate an API key",
+        "operationId": "OriginatorAdminController_sendOriginatorInvitationBulk",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "CSV/Excel file with originator data"
+                  },
+                  "league": {
+                    "type": "string",
+                    "description": "League name"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Bulk invitations sent successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Send bulk originator invitations",
+        "tags": ["Originator - Admin"]
+      }
+    },
+    "/api/originator/admin/{id}/status": {
+      "put": {
+        "description": "Updates the status of an originator. When status is REJECTED, rejection_reason is required.",
+        "operationId": "OriginatorAdminController_updateOriginatorStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Originator ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Status update data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "PENDING_APPROVAL",
+                      "NOT_SUBMITTED",
+                      "APPROVED",
+                      "REJECTED"
+                    ],
+                    "description": "New status for the originator",
+                    "example": "APPROVED"
+                  },
+                  "rejection_reason": {
+                    "type": "string",
+                    "description": "Required when status is REJECTED, should not be provided for other statuses",
+                    "example": "Missing required documentation",
+                    "maxLength": 500
+                  }
+                },
+                "required": ["status"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Originator status updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "rejection_reason": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "updated_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "charter_number": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid status or validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "statusCode": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Originator not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Update originator status",
+        "tags": ["Originator - Admin"]
+      }
+    },
+    "/api/originator/onboarding/admin/league": {
+      "get": {
+        "operationId": "OnboardingAdminController_getLeagues",
+        "parameters": [
+          {
+            "name": "page",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Leagues retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get all leagues",
+        "tags": ["Originator Onboarding - Admin"]
+      }
+    },
+    "/api/originator/onboarding/admin/league/create": {
+      "post": {
+        "operationId": "OnboardingAdminController_createLeague",
+        "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
@@ -339,91 +788,4478 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "consumerId": {
-                    "type": "string"
+                  "name": {
+                    "type": "string",
+                    "example": "Sample League"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "contact@sampleleague.com"
+                  },
+                  "state": {
+                    "type": "string",
+                    "example": "CA"
+                  },
+                  "accessCode": {
+                    "type": "string",
+                    "example": "123456"
                   }
                 },
-                "required": ["consumerId"]
+                "required": ["name", "email", "state"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "League created successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Create league",
+        "tags": ["Originator Onboarding - Admin"]
+      }
+    },
+    "/api/s3/presigned-url": {
+      "post": {
+        "operationId": "S3Controller_getPresignedUrl",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fileName": {
+                    "type": "string",
+                    "example": "example.pdf",
+                    "description": "Name of the file to generate a presigned URL for"
+                  }
+                },
+                "required": ["fileName"]
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "API key rolled successfully"
+            "description": "Presigned URL generated successfully"
           }
         },
-        "operationId": "roll-api-key",
-        "x-zuplo-route": {
-          "corsPolicy": "none",
-          "handler": {
-            "export": "rollApiKeyHandler",
-            "module": "$import(./modules/api-key-handlers)"
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get a presigned URL for file download",
+        "tags": ["s3"]
+      }
+    },
+    "/api/s3/presigned-url/upload": {
+      "post": {
+        "operationId": "S3Controller_getUploadPresignedUrl",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fileName": {
+                    "type": "string",
+                    "example": "example.pdf",
+                    "description": "Name of the file to upload"
+                  },
+                  "fileType": {
+                    "type": "string",
+                    "example": "application/pdf",
+                    "description": "MIME type of the file"
+                  }
+                },
+                "required": ["fileName", "fileType"]
+              }
+            }
           }
         },
-        "tags": ["API Keys"]
+        "responses": {
+          "200": {
+            "description": "Upload presigned URL generated successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get a presigned URL for file upload",
+        "tags": ["s3"]
+      }
+    },
+    "/api/s3/read/stream/{fileName}": {
+      "get": {
+        "operationId": "S3Controller_getFileStream",
+        "parameters": [
+          {
+            "name": "fileName",
+            "required": true,
+            "in": "path",
+            "description": "Name of the file to stream",
+            "schema": {
+              "example": "example.pdf",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "File streamed successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Stream a file from S3",
+        "tags": ["s3"]
+      }
+    },
+    "/api/investor/dashboard": {
+      "get": {
+        "operationId": "InvestorController_getMyChecklist",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "tags": ["Investor"]
+      }
+    },
+    "/api/investor/onboarding": {
+      "post": {
+        "operationId": "InvestorController_createInvestorOnboarding",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvestorOnboardingDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Investors onboarding created."
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Create Investor Onboarding Data",
+        "tags": ["Investor"]
+      },
+      "get": {
+        "operationId": "InvestorController_getOnboardingDetails",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Investors onboarding details."
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Reterive investor onboarding details.",
+        "tags": ["Investor"]
+      }
+    },
+    "/api/investor/me": {
+      "get": {
+        "operationId": "InvestorController_getMyOnboardingData",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Onboarding data retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get onboarding data for current investor",
+        "tags": ["Investor"]
+      },
+      "put": {
+        "operationId": "InvestorController_updateMyOnboardingData",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Onboarding data updated successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Update onboarding data for current investor",
+        "tags": ["Investor"]
+      }
+    },
+    "/api/investor/proof-of-authorization": {
+      "post": {
+        "operationId": "InvestorController_addProofOfAuthorization",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "documentName": {
+                    "type": "string",
+                    "example": "Board Resolution"
+                  },
+                  "file": {
+                    "type": "string",
+                    "example": "https://example.com/file.pdf"
+                  }
+                },
+                "required": ["documentName", "file"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Proof of authorization added successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Add proof of authorization document",
+        "tags": ["Investor"]
+      }
+    },
+    "/api/investor/{id}": {
+      "get": {
+        "operationId": "InvestorController_getInvestorById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 1,
+                  "clerk_id": "usr_21ndln232",
+                  "name": "investor",
+                  "entity_type": "type",
+                  "registration_number": "reg-123232",
+                  "contact_person": "Jhon",
+                  "is_submitted": false,
+                  "submission_id": 1,
+                  "status": "NOT_SUBMITTED",
+                  "created_at": "31-01-2025",
+                  "updated_at": "31-01-2025",
+                  "onboarding_data": null
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get investor by investor id.",
+        "tags": ["Investor"]
+      }
+    },
+    "/api/investor/admin/invitation": {
+      "post": {
+        "operationId": "InvestorAdminController_createInvestorInvitation",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "John"
+                  },
+                  "entityType": {
+                    "type": "string",
+                    "example": "Investor"
+                  },
+                  "registerationNumber": {
+                    "type": "string",
+                    "example": "TR-32342-432"
+                  },
+                  "contactPerson": {
+                    "type": "string",
+                    "example": "Doe"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "investor@squid.com"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "example": "+1123244344"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Invitation sent successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Send investor invitation",
+        "tags": ["Investor - Admin"]
+      }
+    },
+    "/api/investor/admin/options": {
+      "get": {
+        "operationId": "InvestorAdminController_getInvestorOptions",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Investor options retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get investor options (id and name only)",
+        "tags": ["Investor - Admin"]
+      }
+    },
+    "/api/investor/admin/all": {
+      "get": {
+        "operationId": "InvestorAdminController_getInvestors",
+        "parameters": [
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "Filter by status (NOT_SUBMITTED, PENDING_APPROVAL, ACCEPTED, CHANGE_REQUEST, REJECTED)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "description": "Search by company name or email",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Items per page",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Investors retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get all investors",
+        "tags": ["Investor - Admin"]
+      }
+    },
+    "/api/investor/admin/application/{id}": {
+      "put": {
+        "operationId": "InvestorAdminController_updateApplicationStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 1,
+                  "clerk_id": "usr_21ndln232",
+                  "name": "investor",
+                  "entity_type": "type",
+                  "registration_number": "reg-123232",
+                  "contact_person": "Jhon",
+                  "is_submitted": false,
+                  "submission_id": 1,
+                  "status": "NOT_SUBMITTED",
+                  "created_at": "31-01-2025",
+                  "updated_at": "31-01-2025",
+                  "onboarding_data": null
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Update the onboarding application is status",
+        "tags": ["Investor - Admin"]
+      }
+    },
+    "/api/investor/admin/{id}": {
+      "delete": {
+        "operationId": "InvestorAdminController_deleteInvestorById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "tags": ["Investor - Admin"]
+      }
+    },
+    "/api/investor/admin/onboarding-data/{id}": {
+      "put": {
+        "operationId": "InvestorAdminController_updateOnboardingData",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInvestorOnboardingDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": {
+                  "profile": null,
+                  "aggrement": null
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Update the investor onboarding data.",
+        "tags": ["Investor - Admin"]
+      }
+    },
+    "/api/docusign/onboarding/{type}": {
+      "post": {
+        "operationId": "DocusignController_createISigningLink",
+        "parameters": [
+          {
+            "name": "type",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": ["Docusign"]
+      }
+    },
+    "/api/docusign/send/documents": {
+      "post": {
+        "operationId": "DocusignController_sendDocuments",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignDocumentsRequestBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Send documents for signing.",
+        "tags": ["Docusign"]
+      }
+    },
+    "/api/docusign/documents": {
+      "get": {
+        "operationId": "DocusignController_getDocuments",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "List of documents for signing",
+        "tags": ["Docusign"]
+      }
+    },
+    "/api/docusign/process/webhook": {
+      "post": {
+        "operationId": "DocusignController_processWebhook",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocuSignWebhookDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Document signing webhook",
+        "tags": ["Docusign"]
+      }
+    },
+    "/api/docusign/envelope/{envelopeId}": {
+      "post": {
+        "operationId": "DocusignController_getEvelopeById",
+        "parameters": [
+          {
+            "name": "envelopeId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocuSignWebhookDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Get envelope for embedded signing",
+        "tags": ["Docusign"]
+      },
+      "get": {
+        "operationId": "DocusignController_getEvelopeSenderViewById",
+        "parameters": [
+          {
+            "name": "envelopeId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocuSignWebhookDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Get envelope for sender view",
+        "tags": ["Docusign"]
+      }
+    },
+    "/api/docusign/envelope/{envelopeId}/download": {
+      "get": {
+        "operationId": "DocusignController_getEvelopeDocumentById",
+        "parameters": [
+          {
+            "name": "envelopeId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocuSignWebhookDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Download envelope document",
+        "tags": ["Docusign"]
+      }
+    },
+    "/api/docusign/send/notification": {
+      "post": {
+        "operationId": "DocusignController_resendSignatureNotification",
+        "parameters": [
+          {
+            "name": "envelopeId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnvelopeIdSchemaDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "summary": "Resend document notification. by envelope id",
+        "tags": ["Docusign"]
+      }
+    },
+    "/api/deal": {
+      "post": {
+        "operationId": "DealController_createDeal",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDealDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Deal request created successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Create a new deal request",
+        "tags": ["Deals"]
+      },
+      "get": {
+        "operationId": "DealController_listDeals",
+        "parameters": [
+          {
+            "name": "date_to",
+            "required": false,
+            "in": "query",
+            "description": "Filter by end date (YYYY-MM-DD)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date_from",
+            "required": false,
+            "in": "query",
+            "description": "Filter by start date (YYYY-MM-DD)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "asset_type",
+            "required": false,
+            "in": "query",
+            "description": "Filter by asset type",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "Filter by deal status",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Items per page",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deal requests retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get list of originator deal requests",
+        "tags": ["Deals"]
+      }
+    },
+    "/api/deal/update/{id}": {
+      "post": {
+        "operationId": "DealController_updateDealRequest",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDealDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Deal request created successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Update a deal request",
+        "tags": ["Deals"]
+      }
+    },
+    "/api/deal/{id}": {
+      "get": {
+        "operationId": "DealController_getDealById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Deal Request ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deal request retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get deal request by ID",
+        "tags": ["Deals"]
+      },
+      "delete": {
+        "operationId": "DealController_deleteDealById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Deal Request ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deal request deleted successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Delete a deal request by ID",
+        "tags": ["Deals"]
+      }
+    },
+    "/api/deal/quality-report/{id}": {
+      "get": {
+        "operationId": "DealController_getQualityReportByDealId",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Deal Request ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deal Quality Report retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get deal quality report by deal id",
+        "tags": ["Deals"]
+      }
+    },
+    "/api/deal/upload-url": {
+      "post": {
+        "operationId": "DealController_getUploadUrl",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetUploadUrlDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Upload URL generated successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get presigned URL for file upload",
+        "tags": ["Deals"]
+      }
+    },
+    "/api/deal/file": {
+      "post": {
+        "operationId": "DealController_addFileToDeal",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddDealFileDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "File added to deal request successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Add file information to deal request",
+        "tags": ["Deals"]
+      }
+    },
+    "/api/deal/mark/in-review": {
+      "post": {
+        "operationId": "DealController_markDealInReview",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DealRequestIdDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Update the originator status to in review",
+        "tags": ["Deals"]
+      }
+    },
+    "/api/deal/{id}/complete": {
+      "post": {
+        "operationId": "DealController_completeDeal",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Deal Request ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deal request completed successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Complete deal request submission",
+        "tags": ["Deals"]
+      }
+    },
+    "/api/deal/{id}/status": {
+      "post": {
+        "operationId": "DealController_changeDealStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Deal Request ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeOriginatorDealStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deal request status changed successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Change deal request status (originator)",
+        "tags": ["Deals"]
+      }
+    },
+    "/api/deal/{id}/cancel": {
+      "post": {
+        "operationId": "DealController_cancelDeal",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Deal Request ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deal request cancelled successfully"
+          },
+          "400": {
+            "description": "Deal cannot be cancelled (already approved, etc.)"
+          },
+          "404": {
+            "description": "Deal request not found"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Cancel a deal request",
+        "tags": ["Deals"]
+      }
+    },
+    "/api/deal/files/{id}": {
+      "get": {
+        "operationId": "DealController_getFilesAndAnalysisByDealRequestId",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Deal Request ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Files and analysis retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get files and analysis by deal request ID",
+        "tags": ["Deals"]
+      }
+    },
+    "/api/deal/securitized/documents/{securitizedDealId}": {
+      "get": {
+        "operationId": "DealController_getAllSecuritizedSigningDocuments",
+        "parameters": [
+          {
+            "name": "securitizedDealId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Signing Socuments retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get all signed documents",
+        "tags": ["Deals"]
+      }
+    },
+    "/api/deal/marketplace/listing": {
+      "get": {
+        "operationId": "DealController_getMarketplaceDeals",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Marketplace deal requests retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get marketplace deal requests with status filters",
+        "tags": ["Deals"]
+      }
+    },
+    "/api/deal/investor-interest": {
+      "post": {
+        "operationId": "DealController_createInvestorInterest",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInvestorInterestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Investor interest created successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Create investor interest for a deal",
+        "tags": ["Deals"]
+      }
+    },
+    "/api/deal/debug/statuses": {
+      "get": {
+        "operationId": "DealController_getAvailableStatuses",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Debug: Get all available statuses",
+        "tags": ["Deals"]
+      }
+    },
+    "/api/deal/assets-types/all": {
+      "get": {
+        "operationId": "DealController_getAllAssetTypes",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Asset types retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get all asset types",
+        "tags": ["Deals"]
+      }
+    },
+    "/api/deal/admin/all": {
+      "get": {
+        "operationId": "DealAdminController_listAllDeals",
+        "parameters": [
+          {
+            "name": "date_to",
+            "required": false,
+            "in": "query",
+            "description": "Filter by end date (YYYY-MM-DD)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date_from",
+            "required": false,
+            "in": "query",
+            "description": "Filter by start date (YYYY-MM-DD)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "asset_type",
+            "required": false,
+            "in": "query",
+            "description": "Filter by asset type",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "Filter by deal status",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Items per page",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deal requests retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get list of all deal requests",
+        "tags": ["Deals - Admin"]
+      }
+    },
+    "/api/deal/admin/price/guide/{id}": {
+      "post": {
+        "operationId": "DealAdminController_createPriceGuide",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Deal Request ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Price Guide created successfully"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Request not found"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Create Price Guide",
+        "tags": ["Deals - Admin"]
+      }
+    },
+    "/api/deal/admin/stratification/analysis/{dealRequestId}": {
+      "get": {
+        "operationId": "DealAdminController_getStratificationAnaysisByDealRequestId",
+        "parameters": [
+          {
+            "name": "dealRequestId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Deal Request ID",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deal Request fetch successfully"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Request not found"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Fetch stratification analysis by deal request id",
+        "tags": ["Deals - Admin"]
+      }
+    },
+    "/api/deal/admin/{id}": {
+      "delete": {
+        "operationId": "DealAdminController_adminDeleteDeal",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Deal Request ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deal request deleted successfully by admin"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Delete a deal request by ID (admin only)",
+        "tags": ["Deals - Admin"]
+      }
+    },
+    "/api/deal/admin/{id}/status": {
+      "put": {
+        "operationId": "DealAdminController_updateDealStatusAdmin",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Deal Request ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeDealStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deal request status updated successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Update deal request status (admin only)",
+        "tags": ["Deals - Admin"]
+      }
+    },
+    "/api/deal/admin/assets-types/all": {
+      "get": {
+        "operationId": "DealAdminController_getAllAssetTypes",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Asset types retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get all asset types",
+        "tags": ["Deals - Admin"]
+      }
+    },
+    "/api/loan-stratification/validate/tape": {
+      "post": {
+        "operationId": "LoanStratificationController_validateFileHeader",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": ["LoanStratification"]
+      }
+    },
+    "/api/leads/create": {
+      "post": {
+        "operationId": "LeadsController_createLead",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "workEmail": {
+                    "type": "string",
+                    "example": "john@creditunion.com"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "John Doe"
+                  },
+                  "creditUnionName": {
+                    "type": "string",
+                    "example": "Community Credit Union"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Lead submitted successfully"
+          }
+        },
+        "summary": "Submit a new lead",
+        "tags": ["Leads"]
+      }
+    },
+    "/api/leads": {
+      "get": {
+        "operationId": "LeadsController_getLeads",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Items per page",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Leads retrieved successfully"
+          }
+        },
+        "summary": "Get all leads (Admin only)",
+        "tags": ["Leads"]
+      }
+    },
+    "/api/leads/admin/{id}": {
+      "delete": {
+        "operationId": "LeadsAdminController_deleteLead",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Lead ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lead deleted successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Delete a lead (Admin only)",
+        "tags": ["LeadsAdmin"]
+      }
+    },
+    "/api/claude/analyze-file": {
+      "post": {
+        "operationId": "ClaudeController_generateFileAnalysis",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "description": "File ID to analyze with Claude AI",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateClaudeFileAnalysisDto"
+              },
+              "examples": {
+                "example1": {
+                  "summary": "Analyze a single loan tape file using Claude",
+                  "value": {
+                    "fileId": "clx1234567890abcdef"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Claude analysis generated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "fileId": {
+                          "type": "string",
+                          "example": "clx1234567890abcdef"
+                        },
+                        "analysis": {
+                          "type": "string",
+                          "example": "Portfolio Summary\n\nTotal loans: 150\nTotal value: $2.5M..."
+                        },
+                        "isFromCache": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "fileInfo": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "type": {
+                              "type": "string"
+                            },
+                            "size": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Claude analysis generated successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid file ID"
+          },
+          "403": {
+            "description": "Access denied to file"
+          },
+          "404": {
+            "description": "File not found"
+          },
+          "500": {
+            "description": "Claude API key not configured or internal server error"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Generate Claude AI analysis for a single file",
+        "tags": ["Claude"]
+      }
+    },
+    "/api/claude/ai-summary/securitization": {
+      "post": {
+        "operationId": "ClaudeController_generateAiSummary",
+        "parameters": [
+          {
+            "name": "regenerate",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Securitization Deal ID to generate AI summary for marketplace",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateAiSummaryDto"
+              },
+              "examples": {
+                "example1": {
+                  "summary": "Generate AI summary for a live securitization deal",
+                  "value": {
+                    "securitizationDealId": "clx1234567890abcdef"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "AI summary for live deal generated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "securitizationDealId": {
+                          "type": "string",
+                          "example": "clx1234567890abcdef"
+                        },
+                        "analysis": {
+                          "type": "string",
+                          "example": "CREDIT UNION LOAN SECURITIZATION - LIVE\n⚡ 15 Days Remaining | 67% Subscribed\nAsset Type: Consumer Loans\nSPV: TappenGine SPV LLC\n\nCLASS A SENIOR NOTES..."
+                        },
+                        "isFromCache": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "dealInfo": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "AI summary for live deal generated successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid securitization deal ID"
+          },
+          "403": {
+            "description": "Access denied to securitization deal"
+          },
+          "404": {
+            "description": "Securitization deal not found"
+          },
+          "500": {
+            "description": "Claude API key not configured or internal server error"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Generate AI summary for a live securitization deal",
+        "tags": ["Claude"]
+      }
+    },
+    "/api/claude/ai-summary/deal-request": {
+      "post": {
+        "operationId": "ClaudeController_generateDealRequestAiSummary",
+        "parameters": [
+          {
+            "name": "regenerate",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Deal Request ID to generate AI summary for in-progress deals",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateDealRequestAiSummaryDto"
+              },
+              "examples": {
+                "example1": {
+                  "summary": "Generate AI summary for a deal request in progress",
+                  "value": {
+                    "dealRequestId": "clx1234567890abcdef"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "AI summary for deal request generated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "dealRequestId": {
+                          "type": "string",
+                          "example": "clx1234567890abcdef"
+                        },
+                        "analysis": {
+                          "type": "string",
+                          "example": "CREDIT UNION AUTO LOANS - IN PROGRESS\\nExpected to go live: Q2 2024\\nAsset Type: Auto Loans\\nTarget Size: $50.0M\\n\\nSTRUCTURING STATUS..."
+                        },
+                        "isFromCache": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "dealRequestInfo": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "AI summary for deal request generated successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid deal request ID"
+          },
+          "403": {
+            "description": "Access denied to deal request"
+          },
+          "404": {
+            "description": "Deal request not found"
+          },
+          "500": {
+            "description": "Claude API key not configured or internal server error"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Generate AI summary for a deal request in progress",
+        "tags": ["Claude"]
+      }
+    },
+    "/api/financial-information/originators/{originatorClerkId}/banking": {
+      "post": {
+        "operationId": "FinancialInformationController_createOrUpdateBankingDetails",
+        "parameters": [
+          {
+            "name": "originatorClerkId",
+            "required": true,
+            "in": "path",
+            "description": "Originator Clerk ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "bankName": {
+                    "type": "string",
+                    "example": "Wells Fargo"
+                  },
+                  "accountNumber": {
+                    "type": "string",
+                    "example": "1234567890"
+                  },
+                  "routingNumber": {
+                    "type": "string",
+                    "example": "121000248"
+                  },
+                  "bankAddress": {
+                    "type": "string",
+                    "example": "420 Montgomery Street, San Francisco, CA 94104"
+                  },
+                  "accountHolderName": {
+                    "type": "string",
+                    "example": "Community Credit Union"
+                  },
+                  "swiftCode": {
+                    "type": "string",
+                    "example": "WFBIUS6S"
+                  },
+                  "iban": {
+                    "type": "string",
+                    "example": "GB82WEST12345698765432"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Banking details updated successfully"
+          },
+          "201": {
+            "description": "Banking details created successfully"
+          }
+        },
+        "summary": "Create or update banking details for an originator",
+        "tags": ["FinancialInformation"]
+      }
+    },
+    "/api/financial-information/originators/{originatorId}/banking": {
+      "put": {
+        "operationId": "FinancialInformationController_updateBankingDetails",
+        "parameters": [
+          {
+            "name": "originatorId",
+            "required": true,
+            "in": "path",
+            "description": "Originator ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "bankName": {
+                    "type": "string",
+                    "example": "Wells Fargo"
+                  },
+                  "accountNumber": {
+                    "type": "string",
+                    "example": "1234567890"
+                  },
+                  "routingNumber": {
+                    "type": "string",
+                    "example": "121000248"
+                  },
+                  "bankAddress": {
+                    "type": "string",
+                    "example": "420 Montgomery Street, San Francisco, CA 94104"
+                  },
+                  "accountHolderName": {
+                    "type": "string",
+                    "example": "Community Credit Union"
+                  },
+                  "swiftCode": {
+                    "type": "string",
+                    "example": "WFBIUS6S"
+                  },
+                  "iban": {
+                    "type": "string",
+                    "example": "GB82WEST12345698765432"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Banking details updated successfully"
+          }
+        },
+        "summary": "Update existing banking details for an originator",
+        "tags": ["FinancialInformation"]
+      }
+    },
+    "/api/financial-information/originators/{originatorId}": {
+      "get": {
+        "operationId": "FinancialInformationController_getOriginatorFinancialInformation",
+        "parameters": [
+          {
+            "name": "originatorId",
+            "required": true,
+            "in": "path",
+            "description": "Originator ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Financial information retrieved successfully"
+          }
+        },
+        "summary": "Get financial information for an originator",
+        "tags": ["FinancialInformation"]
+      }
+    },
+    "/api/securitization": {
+      "get": {
+        "operationId": "SecuritizationController_getSecuritizations",
+        "parameters": [
+          {
+            "name": "overcollateralization",
+            "required": false,
+            "in": "query",
+            "description": "Filter by overcollateralization value",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "closeDate",
+            "required": false,
+            "in": "query",
+            "description": "Filter by subscription close date (YYYY-MM-DD)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "required": false,
+            "in": "query",
+            "description": "Filter by deal name or title",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date_to",
+            "required": false,
+            "in": "query",
+            "description": "Filter by end date (YYYY-MM-DD)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date_from",
+            "required": false,
+            "in": "query",
+            "description": "Filter by start date (YYYY-MM-DD)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deal_size",
+            "required": false,
+            "in": "query",
+            "description": "Filter by deal size (e.g., \"<5000\", \">10000\", \"5000-10000\")",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "asset_type",
+            "required": false,
+            "in": "query",
+            "description": "Filter by asset type",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Items per page",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Securitizations retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get all securitizations",
+        "tags": ["Securitization"]
+      }
+    },
+    "/api/securitization/quality-report/{id}": {
+      "get": {
+        "operationId": "SecuritizationController_getQualityReportByDealId",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Securitize Deal Id",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Securitize deal quality report retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get securitize deal quality report by id.",
+        "tags": ["Securitization"]
+      }
+    },
+    "/api/securitization/{id}": {
+      "get": {
+        "operationId": "SecuritizationController_getSecuritizationById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Securitization Deal ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Securitization retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get a securitization by ID",
+        "tags": ["Securitization"]
+      }
+    },
+    "/api/securitization/deal/signing-status/{id}": {
+      "get": {
+        "operationId": "SecuritizationController_getCloseDealDocumentSigningStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Securitization Deal ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return securitization deal signing status"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Securitization deal signing status",
+        "tags": ["Securitization"]
+      }
+    },
+    "/api/securitization/{id}/status": {
+      "get": {
+        "operationId": "SecuritizationController_getSecuritizationStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Securitization Deal ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Securitization deal status retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get securitization deal latest status",
+        "tags": ["Securitization"]
+      }
+    },
+    "/api/securitization/{id}/investors-with-trades": {
+      "get": {
+        "operationId": "SecuritizationController_getInvestorsWithTrades",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Securitization Deal ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Investors with trades retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Investor ID"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Investor name"
+                          },
+                          "is_anchor": {
+                            "type": "boolean",
+                            "description": "Whether investor is marked as anchor"
+                          }
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get investors with trades for securitization deal",
+        "tags": ["Securitization"]
+      }
+    },
+    "/api/securitization/admin": {
+      "post": {
+        "operationId": "SecuritizationAdminController_createSecuritization",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSecuritizationSchema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Securitization submitted successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Submit a new Securitization",
+        "tags": ["SecuritizationAdmin"]
+      }
+    },
+    "/api/securitization/admin/{id}": {
+      "put": {
+        "operationId": "SecuritizationAdminController_updateSecuritization",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Securitization Deal ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSecuritizationSchema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Securitization updated successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Update a Securitization",
+        "tags": ["SecuritizationAdmin"]
+      },
+      "delete": {
+        "operationId": "SecuritizationAdminController_deleteSecuritization",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Securitization Deal ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Securitization deleted successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Delete a Securitization (Admin only)",
+        "tags": ["SecuritizationAdmin"]
+      }
+    },
+    "/api/securitization/admin/{id}/tranches": {
+      "post": {
+        "operationId": "SecuritizationAdminController_createAndFetchTranches",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Securitization Deal ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Tranche configuration data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAndFetchTranchesSchema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Tranches created/updated and configuration retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Create and fetch tranches",
+        "tags": ["SecuritizationAdmin"]
+      }
+    },
+    "/api/securitization/admin/{id}/stratification-analysis": {
+      "get": {
+        "operationId": "SecuritizationAdminController_getCombinedStratificationAnalysis",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Securitization Deal ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Combined stratification analysis retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get combined stratification analysis",
+        "tags": ["SecuritizationAdmin"]
+      }
+    },
+    "/api/securitization/admin/cusip-code/{id}": {
+      "post": {
+        "operationId": "SecuritizationAdminController_saveCusip",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Securitization Deal ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CusipGenerateDocumentSchema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Save CUSIP and generate documents for signing"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Save CUSIP and generate documents for signing",
+        "tags": ["SecuritizationAdmin"]
+      }
+    },
+    "/api/securitization/admin/deal/close/{id}": {
+      "post": {
+        "operationId": "SecuritizationAdminController_closeSecuritizationDeal",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Securitization Deal ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CusipGenerateDocumentSchema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Save CUSIP and generate documents for signing"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Close securitize deal so it would be visible to investors",
+        "tags": ["SecuritizationAdmin"]
+      }
+    },
+    "/api/securitization/admin/{id}/status": {
+      "put": {
+        "operationId": "SecuritizationAdminController_changeSecuritizationStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Securitization Deal ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": ["DRAFT", "SIGN_PENDING", "SIGNED", "CLOSED"]
+                  }
+                },
+                "required": ["status"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Securitization deal status updated successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Change securitization deal status (Admin only)",
+        "tags": ["SecuritizationAdmin"]
+      }
+    },
+    "/api/securitization/admin/{id}/anchor-investor": {
+      "put": {
+        "operationId": "SecuritizationAdminController_manageAnchorInvestor",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Securitization Deal ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManageAnchorInvestorSchema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Anchor investor managed successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Manage anchor investor for securitization deal (Admin only)",
+        "tags": ["SecuritizationAdmin"]
+      }
+    },
+    "/api/securitization/admin/pools/{assetId}": {
+      "get": {
+        "operationId": "SecuritizationAdminController_getSecuritizablePools",
+        "parameters": [
+          {
+            "name": "assetId",
+            "required": true,
+            "in": "path",
+            "description": "Asset Type ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Securitizable pools retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get securitizable pools",
+        "tags": ["SecuritizationAdmin"]
+      }
+    },
+    "/api/w9form/save": {
+      "post": {
+        "operationId": "W9FormController_upsert",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateW9FormDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "W9Form created or updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/W9FormResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Create or update a W9Form (upsert)",
+        "tags": ["W9Form"]
+      }
+    },
+    "/api/w9form": {
+      "get": {
+        "operationId": "W9FormController_getMyW9Form",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "W9Form for current user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/W9FormResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get my W9Form",
+        "tags": ["W9Form"]
+      }
+    },
+    "/api/w9form/update-signing-status": {
+      "post": {
+        "operationId": "W9FormController_updateSigningStatus",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "W9Form signing status updated successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Update W9Form signing status",
+        "tags": ["W9Form"]
+      }
+    },
+    "/api/w9form/docusign-url": {
+      "get": {
+        "operationId": "W9FormController_getW9FormDocusignUrl",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "DocuSign URL generated successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get DocuSign URL for W9Form signing",
+        "tags": ["W9Form"]
+      }
+    },
+    "/api/w9form/{id}": {
+      "get": {
+        "operationId": "W9FormController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "W9Form ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "W9Form retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/W9FormResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get W9Form by ID",
+        "tags": ["W9Form"]
+      },
+      "delete": {
+        "operationId": "W9FormController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "W9Form ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "W9Form deleted successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Delete W9Form by ID",
+        "tags": ["W9Form"]
+      }
+    },
+    "/api/change-request": {
+      "post": {
+        "operationId": "ChangeRequestController_submitChangeRequest",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "description": "Full onboarding_data object (no type/entityId needed)",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubmitChangeRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Change request submitted"
+          }
+        },
+        "summary": "Submit a change request for onboarding data (investor or originator)",
+        "tags": ["ChangeRequest"]
+      }
+    },
+    "/api/change-request/current-user": {
+      "get": {
+        "operationId": "ChangeRequestController_getCurrentUserPendingChangeRequest",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Pending change request found"
+          },
+          "404": {
+            "description": "No pending change request found"
+          }
+        },
+        "summary": "Get pending change request for the currently logged-in user",
+        "tags": ["ChangeRequest"]
+      }
+    },
+    "/api/change-request/current-user/latest": {
+      "get": {
+        "operationId": "ChangeRequestController_getCurrentUserLatestChangeRequest",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Latest change request found"
+          },
+          "404": {
+            "description": "No change request found"
+          }
+        },
+        "summary": "Get latest change request for the currently logged-in user (any status)",
+        "tags": ["ChangeRequest"]
+      }
+    },
+    "/api/change-request/current-user/can-submit": {
+      "get": {
+        "operationId": "ChangeRequestController_canSubmitChangeRequest",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Check result returned"
+          }
+        },
+        "summary": "Check if user can submit a new change request (24-hour restriction)",
+        "tags": ["ChangeRequest"]
+      }
+    },
+    "/api/change-request/admin/investors": {
+      "get": {
+        "operationId": "ChangeRequestAdminController_getAllInvestors",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "List of all investors"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get all investors (admin)",
+        "tags": ["ChangeRequest - Admin"]
+      }
+    },
+    "/api/change-request/admin/originators": {
+      "get": {
+        "operationId": "ChangeRequestAdminController_getAllOriginators",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "List of all originators"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get all originators (admin)",
+        "tags": ["ChangeRequest - Admin"]
+      }
+    },
+    "/api/change-request/admin/{id}/approve": {
+      "post": {
+        "operationId": "ChangeRequestAdminController_approveChangeRequest",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Investor or Originator ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Change requests approved"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Approve all pending change requests for an investor/originator",
+        "tags": ["ChangeRequest - Admin"]
+      }
+    },
+    "/api/change-request/admin/{id}/reject-changes": {
+      "post": {
+        "operationId": "ChangeRequestAdminController_rejectChangeRequest",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Investor or Originator ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Rejection reason",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RejectChangeRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Change requests rejected"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Reject all pending change requests for an investor/originator",
+        "tags": ["ChangeRequest - Admin"]
+      }
+    },
+    "/api/change-request/admin": {
+      "get": {
+        "operationId": "ChangeRequestAdminController_getChangeRequestsByEntity",
+        "parameters": [
+          {
+            "name": "originatorId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "investorId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of change requests"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get all change requests for a given originator or investor (admin)",
+        "tags": ["ChangeRequest - Admin"]
+      }
+    },
+    "/api/change-request/admin/investor/{id}": {
+      "get": {
+        "operationId": "ChangeRequestAdminController_getInvestorById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Investor ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Investor details retrieved"
+          },
+          "404": {
+            "description": "Investor not found"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get investor by ID from change-request table",
+        "tags": ["ChangeRequest - Admin"]
+      }
+    },
+    "/api/change-request/admin/originator/{id}": {
+      "get": {
+        "operationId": "ChangeRequestAdminController_getOriginatorById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Originator ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Originator details retrieved"
+          },
+          "404": {
+            "description": "Originator not found"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get originator by ID from change-request table",
+        "tags": ["ChangeRequest - Admin"]
+      }
+    },
+    "/api/trade": {
+      "post": {
+        "operationId": "TradeController_createTrade",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTradeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Trade created successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Create a new primary trade",
+        "tags": ["Trades"]
+      }
+    },
+    "/api/trade/{id}": {
+      "put": {
+        "operationId": "TradeController_updateTrade",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Trade ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTradeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Trade updated successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Update an existing trade",
+        "tags": ["Trades"]
+      },
+      "get": {
+        "operationId": "TradeController_getTradeById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Trade ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trade retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get trade by ID",
+        "tags": ["Trades"]
+      },
+      "delete": {
+        "operationId": "TradeController_deleteTrade",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Trade ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trade deleted successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Delete a trade",
+        "tags": ["Trades"]
+      }
+    },
+    "/api/trade/user/my-trades": {
+      "get": {
+        "operationId": "TradeController_getUserTrades",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "User trades retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get paginated list of user trades",
+        "tags": ["Trades"]
+      }
+    },
+    "/api/trade/securitization/{securitizationDealId}/investor-check": {
+      "get": {
+        "operationId": "TradeController_getTradeBySecuritizationAndInvestor",
+        "parameters": [
+          {
+            "name": "securitizationDealId",
+            "required": true,
+            "in": "path",
+            "description": "Securitization Deal ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trade check completed successfully"
+          },
+          "404": {
+            "description": "No existing trade found"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Check if investor has existing trade for securitization deal",
+        "tags": ["Trades"]
+      }
+    },
+    "/api/trade/{id}/status": {
+      "put": {
+        "operationId": "TradeController_updateTradeStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Trade ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTradeStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Trade status updated successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Update trade status",
+        "tags": ["Trades"]
+      }
+    },
+    "/api/trade/admin/create": {
+      "post": {
+        "operationId": "TradeAdminController_createTradeForInvestor",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminCreateTradeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Trade created successfully for investor"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Create a new trade for a specific investor (Admin only)",
+        "tags": ["Trades - Admin"]
+      }
+    },
+    "/api/trade/admin/all": {
+      "get": {
+        "operationId": "TradeAdminController_getAllTrades",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "All trades retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get paginated list of all trades (admin)",
+        "tags": ["Trades - Admin"]
+      }
+    },
+    "/api/trade/admin/{id}/status": {
+      "put": {
+        "operationId": "TradeAdminController_updateTradeStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Trade ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTradeStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Trade status updated successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Update trade status",
+        "tags": ["Trades - Admin"]
+      }
+    },
+    "/api/trade/admin/{id}/status-history": {
+      "get": {
+        "operationId": "TradeAdminController_getTradeStatusHistory",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Trade ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trade status history retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get trade status history",
+        "tags": ["Trades - Admin"]
+      }
+    },
+    "/api/trade/admin/securitization/{securitizationDealId}": {
+      "get": {
+        "operationId": "TradeAdminController_getTradesBySecuritizationId",
+        "parameters": [
+          {
+            "name": "securitizationDealId",
+            "required": true,
+            "in": "path",
+            "description": "Securitization Deal ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tranche_type",
+            "required": false,
+            "in": "query",
+            "description": "Filter by tranche type",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "max_quantity",
+            "required": false,
+            "in": "query",
+            "description": "Filter by maximum quantity",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "min_quantity",
+            "required": false,
+            "in": "query",
+            "description": "Filter by minimum quantity",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "trade_mode",
+            "required": false,
+            "in": "query",
+            "description": "Filter by trade mode",
+            "schema": {
+              "enum": ["TRADITIONAL", "TOKENIZED"],
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "Filter by trade status",
+            "schema": {
+              "enum": [
+                "PENDING",
+                "CONFIRMED",
+                "SETTLED",
+                "FAILED",
+                "CANCELLED",
+                "ALLOCATION_CREATED",
+                "ALLOCATION_DECLINED",
+                "ALLOCATION_CONFIRMED",
+                "ALLOCATION_CANCELED"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Items per page",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trades retrieved successfully"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get trades by securitization deal ID",
+        "tags": ["Trades - Admin"]
+      }
+    },
+    "/api/trade/admin/{id}/confirm-allocation": {
+      "put": {
+        "operationId": "TradeAdminController_confirmTradeAllocation",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Trade ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmTradeAllocationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Trade allocation confirmed successfully"
+          },
+          "400": {
+            "description": "Only anchor investors can confirm trade allocations"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Confirm trade allocation and update allocated quantity (Anchor investors only)",
+        "tags": ["Trades - Admin"]
+      }
+    },
+    "/api/trade/admin/{id}/cancel-allocation": {
+      "put": {
+        "operationId": "TradeAdminController_cancelTradeAllocation",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Trade ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelTradeAllocationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Trade allocation canceled successfully"
+          },
+          "400": {
+            "description": "Only anchor investors can cancel trade allocations"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Cancel trade allocation (Anchor investors only)",
+        "tags": ["Trades - Admin"]
+      }
+    },
+    "/api/trade/admin/{id}/update-quantity": {
+      "put": {
+        "operationId": "TradeAdminController_updateTradeQuantity",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Trade ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTradeQuantityDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Trade quantity updated successfully"
+          },
+          "400": {
+            "description": "Only anchor investors can update trade quantities"
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Update trade quantity without changing status (Anchor investors only)",
+        "tags": ["Trades - Admin"]
+      }
+    },
+    "/api/platform-settings/third-party/emails": {
+      "get": {
+        "operationId": "PlatformSettingsController_getThirdPartyEmails",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Third-party emails retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Third-party emails retrieved successfully"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "trusteeEmail": {
+                          "type": "string",
+                          "example": "trustee@example.com"
+                        },
+                        "masterServicerEmail": {
+                          "type": "string",
+                          "example": "masterservicer@example.com"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get third-party emails (trustee and master servicer)",
+        "tags": ["Platform Settings"]
+      },
+      "put": {
+        "operationId": "PlatformSettingsController_updateThirdPartyEmails",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "trusteeEmail": {
+                    "type": "string",
+                    "example": "newtrustee@example.com"
+                  },
+                  "masterServicerEmail": {
+                    "type": "string",
+                    "example": "newmasterservicer@example.com"
+                  }
+                },
+                "description": "At least one email field is required. You can update one or both emails."
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Third-party emails updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Third-party emails updated successfully"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "trusteeEmail": {
+                          "type": "string",
+                          "example": "newtrustee@example.com"
+                        },
+                        "masterServicerEmail": {
+                          "type": "string",
+                          "example": "newmasterservicer@example.com"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Update third-party emails",
+        "tags": ["Platform Settings"]
+      }
+    },
+    "/api/giact/status/{referenceId}": {
+      "get": {
+        "description": "Retrieve the status of a previous verification request",
+        "operationId": "GiactController_getVerificationStatus",
+        "parameters": [
+          {
+            "name": "referenceId",
+            "required": true,
+            "in": "path",
+            "description": "Verification reference ID",
+            "schema": {
+              "example": "12345",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Verification status retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "found": true,
+                    "status": "COMPLETED",
+                    "referenceId": "12345"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Verification not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "found": false,
+                    "message": "Verification with this reference ID was not found"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "clerk-token": []
+          }
+        ],
+        "summary": "Get verification status",
+        "tags": ["Business Verification"]
       }
     }
   },
+  "info": {
+    "title": "9squid API",
+    "description": "The 9squid API documentation",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "onboarding",
+      "description": ""
+    },
+    {
+      "name": "originator",
+      "description": ""
+    },
+    {
+      "name": "s3",
+      "description": ""
+    }
+  ],
+  "servers": [],
   "components": {
+    "securitySchemes": {
+      "clerk-token": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http",
+        "description": "Enter Clerk JWT token",
+        "in": "header"
+      }
+    },
     "schemas": {
-      "Todo": {
+      "GetUploadUrlDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "InvestorOnboardingDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "UpdateInvestorOnboardingDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "SignDocumentsRequestBodyDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "DocuSignWebhookDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "EnvelopeIdSchemaDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateDealDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "AddDealFileDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "DealRequestIdDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "ChangeOriginatorDealStatusDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateInvestorInterestDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "ChangeDealStatusDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "GenerateClaudeFileAnalysisDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "GenerateAiSummaryDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "GenerateDealRequestAiSummaryDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateSecuritizationSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "UpdateSecuritizationSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateAndFetchTranchesSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "CusipGenerateDocumentSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "ManageAnchorInvestorSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateW9FormDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "W9FormResponseDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "SubmitChangeRequestDto": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "description": "The todo ID"
-          },
-          "title": {
-            "type": "string",
-            "description": "The todo title"
-          },
-          "completed": {
-            "type": "boolean",
-            "description": "Whether the todo is completed"
-          },
-          "userId": {
-            "type": "integer",
-            "description": "The user ID who owns the todo"
+          "onboardingData": {
+            "type": "object",
+            "description": "Full onboarding_data object",
+            "additionalProperties": true
           }
         },
-        "required": ["id", "title", "completed", "userId"]
+        "required": ["onboardingData"]
       },
-      "CreateTodo": {
+      "RejectChangeRequestDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateTradeDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "UpdateTradeDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "UpdateTradeStatusDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "AdminCreateTradeDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "ConfirmTradeAllocationDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "CancelTradeAllocationDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "UpdateTradeQuantityDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "AddressDto": {
         "type": "object",
         "properties": {
-          "title": {
+          "street": {
             "type": "string",
-            "description": "The todo title"
+            "description": "Street address or address line 1",
+            "example": "123 Business Ave"
           },
-          "completed": {
+          "addressLine1": {
+            "type": "string",
+            "description": "Address line 1",
+            "example": "123 Business Ave"
+          },
+          "addressLine2": {
+            "type": "string",
+            "description": "Address line 2 (suite, apartment, etc.)",
+            "example": "Suite 100"
+          },
+          "city": {
+            "type": "string",
+            "description": "City",
+            "example": "Austin"
+          },
+          "state": {
+            "type": "string",
+            "description": "State (2-letter code)",
+            "example": "TX"
+          },
+          "zipCode": {
+            "type": "string",
+            "description": "ZIP/Postal code",
+            "example": "78701"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country code",
+            "example": "US",
+            "default": "US"
+          }
+        },
+        "required": [
+          "street",
+          "addressLine1",
+          "addressLine2",
+          "city",
+          "state",
+          "zipCode",
+          "country"
+        ]
+      },
+      "AccountDataDto": {
+        "type": "object",
+        "properties": {
+          "routingNumber": {
+            "type": "string",
+            "description": "Bank routing number",
+            "example": "122105278"
+          },
+          "accountNumber": {
+            "type": "string",
+            "description": "Bank account number",
+            "example": "0000000019"
+          },
+          "accountType": {
+            "type": "string",
+            "description": "Account type",
+            "example": "savings",
+            "enum": ["checking", "savings"]
+          },
+          "checkAmount": {
+            "type": "number",
+            "description": "Check amount for verification",
+            "example": 0.01,
+            "default": 0.01
+          }
+        },
+        "required": [
+          "routingNumber",
+          "accountNumber",
+          "accountType",
+          "checkAmount"
+        ]
+      },
+      "BusinessVerificationDto": {
+        "type": "object",
+        "properties": {
+          "businessName": {
+            "type": "string",
+            "description": "Business legal name",
+            "example": "Smith & Associates Consulting"
+          },
+          "ein": {
+            "type": "string",
+            "description": "Employer Identification Number (EIN)",
+            "example": "123456543"
+          },
+          "taxId": {
+            "type": "string",
+            "description": "Tax ID (alternative to EIN)",
+            "example": "123456789"
+          },
+          "contactFirstName": {
+            "type": "string",
+            "description": "Primary contact first name",
+            "example": "John"
+          },
+          "contactLastName": {
+            "type": "string",
+            "description": "Primary contact last name",
+            "example": "Smith"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "Business phone number",
+            "example": "2145551212"
+          },
+          "emailAddress": {
+            "type": "string",
+            "description": "Business email address",
+            "example": "contact@techsolutions.com"
+          },
+          "address": {
+            "description": "Business address",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AddressDto"
+              }
+            ]
+          },
+          "accountData": {
+            "description": "Bank account data for verification",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AccountDataDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "businessName",
+          "ein",
+          "taxId",
+          "contactFirstName",
+          "contactLastName",
+          "phoneNumber",
+          "emailAddress",
+          "address",
+          "accountData"
+        ]
+      },
+      "MinimalVerificationDto": {
+        "type": "object",
+        "properties": {
+          "businessName": {
+            "type": "string",
+            "description": "Business name",
+            "example": "Tech Solutions Inc"
+          },
+          "address": {
+            "description": "Business address",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AddressDto"
+              }
+            ]
+          }
+        },
+        "required": ["businessName", "address"]
+      },
+      "VerificationOptionsDto": {
+        "type": "object",
+        "properties": {
+          "includeAccountVerification": {
             "type": "boolean",
-            "description": "Whether the todo is completed",
+            "description": "Include bank account verification",
             "default": false
           },
-          "userId": {
-            "type": "integer",
-            "description": "The user ID who owns the todo"
+          "enableOfacScanning": {
+            "type": "boolean",
+            "description": "Enable OFAC sanctions screening",
+            "default": true
+          },
+          "includeBusinessContacts": {
+            "type": "boolean",
+            "description": "Include business contact information",
+            "default": true
+          },
+          "riskAssessment": {
+            "type": "boolean",
+            "description": "Perform risk assessment",
+            "default": true
           }
         },
-        "required": ["title", "userId"]
+        "required": [
+          "includeAccountVerification",
+          "enableOfacScanning",
+          "includeBusinessContacts",
+          "riskAssessment"
+        ]
       },
-      "UpdateTodo": {
+      "BusinessDetailsDto": {
         "type": "object",
         "properties": {
-          "title": {
+          "ein": {
             "type": "string",
-            "description": "The todo title"
+            "example": "12-3456789"
           },
-          "completed": {
-            "type": "boolean",
-            "description": "Whether the todo is completed"
+          "businessType": {
+            "type": "string",
+            "example": "Corporation"
           },
-          "userId": {
-            "type": "integer",
-            "description": "The user ID who owns the todo"
+          "industry": {
+            "type": "string",
+            "example": "Technology Services"
+          },
+          "yearsInBusiness": {
+            "type": "number",
+            "example": 5
+          },
+          "employeeCount": {
+            "type": "number",
+            "example": 25
           }
-        }
+        },
+        "required": [
+          "ein",
+          "businessType",
+          "industry",
+          "yearsInBusiness",
+          "employeeCount"
+        ]
+      },
+      "BusinessResultDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Tech Solutions Inc"
+          },
+          "verified": {
+            "type": "boolean",
+            "example": true
+          },
+          "verificationLevel": {
+            "type": "string",
+            "example": "FULL",
+            "enum": ["NONE", "PARTIAL", "FULL"]
+          },
+          "riskLevel": {
+            "type": "string",
+            "example": "LOW",
+            "enum": ["LOW", "MEDIUM", "HIGH"]
+          },
+          "details": {
+            "$ref": "#/components/schemas/BusinessDetailsDto"
+          }
+        },
+        "required": [
+          "name",
+          "verified",
+          "verificationLevel",
+          "riskLevel",
+          "details"
+        ]
+      },
+      "AccountResultDto": {
+        "type": "object",
+        "properties": {
+          "verified": {
+            "type": "boolean",
+            "example": true
+          },
+          "bankName": {
+            "type": "string",
+            "example": "Wells Fargo Bank"
+          },
+          "accountType": {
+            "type": "string",
+            "example": "Checking"
+          },
+          "status": {
+            "type": "string",
+            "example": "Account Verified - Checking Account"
+          }
+        },
+        "required": ["verified", "bankName", "accountType", "status"]
+      },
+      "ComplianceResultDto": {
+        "type": "object",
+        "properties": {
+          "ofacClear": {
+            "type": "boolean",
+            "example": true
+          },
+          "sanctionsFound": {
+            "type": "boolean",
+            "example": false
+          },
+          "riskFlags": {
+            "example": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": ["ofacClear", "sanctionsFound", "riskFlags"]
+      },
+      "MetadataDto": {
+        "type": "object",
+        "properties": {
+          "processingTimeMs": {
+            "type": "number",
+            "example": 1250
+          },
+          "environment": {
+            "type": "string",
+            "example": "sandbox",
+            "enum": ["sandbox", "production"]
+          },
+          "apiVersion": {
+            "type": "string",
+            "example": "v5.8"
+          }
+        },
+        "required": ["processingTimeMs", "environment", "apiVersion"]
+      },
+      "ErrorDetailsDto": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "example": "VALIDATION_ERROR"
+          },
+          "message": {
+            "type": "string",
+            "example": "Business name is required"
+          },
+          "suggestion": {
+            "type": "string",
+            "example": "Please provide a valid business name"
+          }
+        },
+        "required": ["code", "message", "suggestion"]
+      },
+      "VerificationResponseDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "referenceId": {
+            "type": "string",
+            "example": "12345"
+          },
+          "timestamp": {
+            "type": "string",
+            "example": "2024-08-29T12:00:00.000Z"
+          },
+          "business": {
+            "$ref": "#/components/schemas/BusinessResultDto"
+          },
+          "account": {
+            "$ref": "#/components/schemas/AccountResultDto"
+          },
+          "compliance": {
+            "$ref": "#/components/schemas/ComplianceResultDto"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/MetadataDto"
+          },
+          "error": {
+            "$ref": "#/components/schemas/ErrorDetailsDto"
+          }
+        },
+        "required": [
+          "success",
+          "referenceId",
+          "timestamp",
+          "business",
+          "account",
+          "compliance",
+          "metadata",
+          "error"
+        ]
       }
     }
   }
