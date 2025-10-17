@@ -355,7 +355,18 @@
         "summary": "Get onboarding data by originator ID",
         "tags": [
           "Originator Onboarding"
-        ]
+        ],
+        "x-zuplo-route": {
+          "handler": {
+            "export": "urlRewriteHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "rewritePattern": "https://api.9squid.com/api/v1/deals"
+            }
+        },
+        "policies": {
+          "inbound": ["api-key-inbound"]
+        }
       }
     },
     "/api/originator/onboarding/upload-url": {
