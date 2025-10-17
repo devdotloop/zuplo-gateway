@@ -1,6 +1,24 @@
 {
   "openapi": "3.0.0",
   "paths": {
+    "/debug/env": {
+      "get": {
+        "summary": "Debug environment variables",
+        "operationId": "debug-env",
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "default",
+            "module": "$import(./modules/test-env)"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Environment variables"
+          }
+        }
+      }
+    },
     "/api/api": {
       "get": {
         "operationId": "AppController_getHello",
@@ -19,7 +37,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -64,7 +82,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -99,7 +117,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -133,7 +151,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -164,7 +182,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -213,7 +231,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -248,7 +266,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -302,7 +320,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -345,7 +363,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -428,7 +446,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -482,7 +500,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -572,7 +590,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -617,7 +635,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -700,7 +718,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -779,7 +797,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -851,7 +869,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -907,7 +925,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -1053,7 +1071,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -1105,7 +1123,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -1173,7 +1191,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -1228,7 +1246,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -1289,7 +1307,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -1335,7 +1353,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -1369,7 +1387,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -1414,7 +1432,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -1447,7 +1465,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -1482,7 +1500,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -1515,7 +1533,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -1574,7 +1592,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -1636,7 +1654,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -1707,7 +1725,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -1771,7 +1789,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -1843,7 +1861,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -1905,7 +1923,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -1948,7 +1966,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -2010,7 +2028,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -2048,7 +2066,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -2088,7 +2106,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -2118,7 +2136,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -2158,7 +2176,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -2207,7 +2225,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -2254,7 +2272,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -2303,7 +2321,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -2352,7 +2370,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -2397,7 +2415,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -2485,7 +2503,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -2539,7 +2557,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -2584,7 +2602,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -2627,7 +2645,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -2672,7 +2690,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -2717,7 +2735,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -2762,7 +2780,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -2807,7 +2825,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -2852,7 +2870,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -2907,7 +2925,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -2958,7 +2976,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -3003,7 +3021,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -3047,7 +3065,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -3082,7 +3100,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -3127,7 +3145,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -3162,7 +3180,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -3197,7 +3215,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -3287,7 +3305,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -3338,7 +3356,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -3395,7 +3413,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -3440,7 +3458,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -3495,7 +3513,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -3530,7 +3548,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -3572,7 +3590,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -3626,7 +3644,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -3675,7 +3693,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -3720,7 +3738,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -3845,7 +3863,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -3966,7 +3984,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -4091,7 +4109,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -4174,7 +4192,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -4254,7 +4272,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -4294,7 +4312,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -4411,7 +4429,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -4456,7 +4474,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -4501,7 +4519,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -4546,7 +4564,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -4591,7 +4609,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -4671,7 +4689,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -4716,7 +4734,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -4771,7 +4789,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -4814,7 +4832,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -4870,7 +4888,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -4915,7 +4933,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -4970,7 +4988,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -5025,7 +5043,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -5094,7 +5112,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -5149,7 +5167,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -5194,7 +5212,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -5246,7 +5264,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -5288,7 +5306,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -5323,7 +5341,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -5358,7 +5376,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -5410,7 +5428,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -5453,7 +5471,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -5494,7 +5512,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -5527,7 +5545,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -5560,7 +5578,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -5590,7 +5608,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -5625,7 +5643,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -5660,7 +5678,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -5705,7 +5723,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -5761,7 +5779,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -5813,7 +5831,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -5861,7 +5879,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -5909,7 +5927,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -5954,7 +5972,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -6009,7 +6027,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -6052,7 +6070,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -6095,7 +6113,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -6130,7 +6148,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -6178,7 +6196,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -6233,7 +6251,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -6278,7 +6296,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -6313,7 +6331,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -6368,7 +6386,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -6413,7 +6431,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -6536,7 +6554,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -6594,7 +6612,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -6652,7 +6670,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -6710,7 +6728,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -6775,7 +6793,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -6859,7 +6877,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
@@ -6930,7 +6948,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BASE_URL)"
+              "baseUrl": "https://dev-api.9squid.com"
             }
           },
           "policies": {
