@@ -90,6 +90,19 @@
             "clerk-token": []
           }
         ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BACKEND_URL)"
+            }
+          },
+          "policies": {
+            "inbound": ["clerk-jwt-auth-inbound"]
+          }
+        },
         "summary": "Get all available charter numbers",
         "tags": ["Originator"]
       }
