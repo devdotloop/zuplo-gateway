@@ -220,6 +220,149 @@
         },
         "tags": ["Todo"]
       }
+    },
+    "/api/create-api-key": {
+      "post": {
+        "summary": "Create API Key",
+        "description": "Create a new API key for the authenticated user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "managers": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "metadata": {
+                    "type": "object"
+                  }
+                },
+                "required": ["name", "managers"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "API key created successfully"
+          }
+        },
+        "operationId": "create-api-key",
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "createApiKeyHandler",
+            "module": "$import(./modules/api-key-handlers)"
+          }
+        },
+        "tags": ["API Keys"]
+      }
+    },
+    "/api/get-api-keys": {
+      "get": {
+        "summary": "Get API Keys",
+        "description": "Retrieve all API keys for the authenticated user",
+        "responses": {
+          "200": {
+            "description": "List of API keys"
+          }
+        },
+        "operationId": "get-api-keys",
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "getApiKeysHandler",
+            "module": "$import(./modules/api-key-handlers)"
+          }
+        },
+        "tags": ["API Keys"]
+      }
+    },
+    "/api/delete-api-key": {
+      "delete": {
+        "summary": "Delete API Key",
+        "description": "Delete an API key",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "consumerId": {
+                    "type": "string"
+                  },
+                  "keyId": {
+                    "type": "string"
+                  }
+                },
+                "required": ["consumerId", "keyId"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "API key deleted successfully"
+          }
+        },
+        "operationId": "delete-api-key",
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "deleteApiKeyHandler",
+            "module": "$import(./modules/api-key-handlers)"
+          }
+        },
+        "tags": ["API Keys"]
+      }
+    },
+    "/api/roll-api-key": {
+      "post": {
+        "summary": "Roll API Key",
+        "description": "Regenerate an API key",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "consumerId": {
+                    "type": "string"
+                  }
+                },
+                "required": ["consumerId"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "API key rolled successfully"
+          }
+        },
+        "operationId": "roll-api-key",
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "rollApiKeyHandler",
+            "module": "$import(./modules/api-key-handlers)"
+          }
+        },
+        "tags": ["API Keys"]
+      }
     }
   },
   "components": {

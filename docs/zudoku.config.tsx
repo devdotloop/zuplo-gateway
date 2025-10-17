@@ -105,13 +105,13 @@ const config: ZudokuConfig = {
       if (!user) throw new Error("Not authenticated");
 
       // Create consumer + key via Zuplo Developer API
-      const response = await fetch(
-        `https://dev.zuplo.com/v1/accounts/${process.env.ZUPLO_ACCOUNT_NAME}/key-buckets/${process.env.ZUPLO_BUCKET_NAME}/consumers?with-api-key=true`,
-        {
+      // Note: You need to implement a backend endpoint that calls the Zuplo API
+      // because browser clients can't safely store API credentials
+      try {
+        const response = await fetch('/api/create-api-key', {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.ZUPLO_DEVELOPER_API_KEY}`,
           },
           body: JSON.stringify({
             name: user.name || user.email,
@@ -122,55 +122,57 @@ const config: ZudokuConfig = {
               email: user.email,
             },
           }),
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('Create key failed:', response.status, errorText);
+          throw new Error(`Failed to create API key: ${response.status} ${errorText}`);
         }
-      );
 
-      if (!response.ok) {
-        throw new Error("Failed to create API key");
+        const result = await response.json();
+        console.log('API key created successfully:', result);
+      } catch (error) {
+        console.error('Error creating API key:', error);
+        throw error;
       }
-
-      // Don't return anything - it expects void
-      // The new key will be fetched via getKeys on next load
     },
 
     // Fetch existing keys for logged-in user
     // Note: getKeys should return a flat array of ApiKey[], not consumers
     // This is a workaround since Zuplo API uses consumers
     getKeys: async (context) => {
-      // We need to get user email somehow - context doesn't provide it directly
-      // This is a limitation of the simplified API
-      // For now, we'll need to rely on the authentication headers
+      try {
+        const response = await fetch('/api/get-api-keys');
 
-      const response = await fetch(
-        `https://dev.zuplo.com/v1/accounts/${process.env.ZUPLO_ACCOUNT_NAME}/key-buckets/${process.env.ZUPLO_BUCKET_NAME}/consumers?include-api-keys=true&key-format=visible`,
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.ZUPLO_DEVELOPER_API_KEY}`,
-          },
+        if (!response.ok) {
+          console.error('Get keys failed:', response.status);
+          return [];
         }
-      );
 
-      if (!response.ok) return [];
+        const consumers = await response.json();
 
-      const consumers = await response.json();
-
-      // Flatten all keys from all consumers into a single array
-      const allKeys: any[] = [];
-      for (const consumer of consumers) {
-        if (consumer.apiKeys) {
-          for (const key of consumer.apiKeys) {
-            allKeys.push({
-              id: `${consumer.id}:${key.id}`, // Encode both IDs for later use
-              key: key.key,
-              description: key.description || consumer.name,
-              createdOn: key.createdOn,
-              expiresOn: key.expiresOn,
-            });
+        // Flatten all keys from all consumers into a single array
+        const allKeys: any[] = [];
+        for (const consumer of consumers) {
+          if (consumer.apiKeys) {
+            for (const key of consumer.apiKeys) {
+              allKeys.push({
+                id: `${consumer.id}:${key.id}`, // Encode both IDs for later use
+                key: key.key,
+                description: key.description || consumer.name,
+                createdOn: key.createdOn,
+                expiresOn: key.expiresOn,
+              });
+            }
           }
         }
-      }
 
-      return allKeys;
+        return allKeys;
+      } catch (error) {
+        console.error('Error fetching API keys:', error);
+        return [];
+      }
     },
 
     // Delete API key - Also returns void
@@ -181,16 +183,19 @@ const config: ZudokuConfig = {
         throw new Error('Invalid key ID format');
       }
 
-      await fetch(
-        `https://dev.zuplo.com/v1/accounts/${process.env.ZUPLO_ACCOUNT_NAME}/key-buckets/${process.env.ZUPLO_BUCKET_NAME}/consumers/${consumerId}/keys/${keyId}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${process.env.ZUPLO_DEVELOPER_API_KEY}`,
-          },
-        }
-      );
-      // No return - void
+      const response = await fetch('/api/delete-api-key', {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ consumerId, keyId }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Delete key failed:', response.status, errorText);
+        throw new Error(`Failed to delete API key: ${response.status}`);
+      }
     },
 
     // Roll (regenerate) API key - Also returns void
@@ -201,16 +206,19 @@ const config: ZudokuConfig = {
         throw new Error('Invalid key ID format');
       }
 
-      await fetch(
-        `https://dev.zuplo.com/v1/accounts/${process.env.ZUPLO_ACCOUNT_NAME}/key-buckets/${process.env.ZUPLO_BUCKET_NAME}/consumers/${consumerId}/keys/roll`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${process.env.ZUPLO_DEVELOPER_API_KEY}`,
-          },
-        }
-      );
-      // No return - void
+      const response = await fetch('/api/roll-api-key', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ consumerId }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Roll key failed:', response.status, errorText);
+        throw new Error(`Failed to roll API key: ${response.status}`);
+      }
     },
     
   },
