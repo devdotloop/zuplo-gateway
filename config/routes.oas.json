@@ -10,7 +10,24 @@
             "description": ""
           }
         },
-        "tags": ["App"]
+        "tags": [
+          "App"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/originator/clerk-id/{id}": {
@@ -38,7 +55,24 @@
           }
         ],
         "summary": "Get originator by Clerk ID",
-        "tags": ["Originator"]
+        "tags": [
+          "Originator"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/originator/me": {
@@ -56,7 +90,24 @@
           }
         ],
         "summary": "Get onboarding data for current originator",
-        "tags": ["Originator"]
+        "tags": [
+          "Originator"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/originator/webhook/clerk": {
@@ -73,7 +124,24 @@
             "clerk-token": []
           }
         ],
-        "tags": ["Originator"]
+        "tags": [
+          "Originator"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/originator/available-charter-numbers": {
@@ -100,11 +168,15 @@
             }
           },
           "policies": {
-            "inbound": ["api-key-inbound"]
+            "inbound": [
+              "api-key-inbound"
+            ]
           }
         },
         "summary": "Get all available charter numbers",
-        "tags": ["Originator"]
+        "tags": [
+          "Originator"
+        ]
       }
     },
     "/api/originator/{id}": {
@@ -132,7 +204,24 @@
           }
         ],
         "summary": "Get originator by ID",
-        "tags": ["Originator"]
+        "tags": [
+          "Originator"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/originator/me/contact-info": {
@@ -150,7 +239,24 @@
           }
         ],
         "summary": "Update user contact information",
-        "tags": ["Originator"]
+        "tags": [
+          "Originator"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/originator/onboarding/verify/league/access-code": {
@@ -169,7 +275,9 @@
                     "example": "123456"
                   }
                 },
-                "required": ["accessCode"]
+                "required": [
+                  "accessCode"
+                ]
               }
             }
           }
@@ -185,7 +293,24 @@
           }
         ],
         "summary": "Verify league access code",
-        "tags": ["Originator Onboarding"]
+        "tags": [
+          "Originator Onboarding"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/originator/onboarding/charter-number/{id}": {
@@ -211,7 +336,24 @@
           }
         ],
         "summary": "Get charter number",
-        "tags": ["Originator Onboarding"]
+        "tags": [
+          "Originator Onboarding"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/originator/onboarding": {
@@ -248,14 +390,20 @@
                     "items": {
                       "type": "string"
                     },
-                    "example": ["file1.pdf", "file2.pdf"]
+                    "example": [
+                      "file1.pdf",
+                      "file2.pdf"
+                    ]
                   },
                   "originatorName": {
                     "type": "string",
                     "example": "Sample Originator"
                   }
                 },
-                "required": ["originatorId", "step"]
+                "required": [
+                  "originatorId",
+                  "step"
+                ]
               }
             }
           }
@@ -271,7 +419,24 @@
           }
         ],
         "summary": "Update onboarding step",
-        "tags": ["Originator Onboarding"]
+        "tags": [
+          "Originator Onboarding"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/originator/onboarding/resend/league/invite": {
@@ -290,7 +455,9 @@
                     "example": "league_123"
                   }
                 },
-                "required": ["id"]
+                "required": [
+                  "id"
+                ]
               }
             }
           }
@@ -306,7 +473,24 @@
           }
         ],
         "summary": "Resend league invite",
-        "tags": ["Originator Onboarding"]
+        "tags": [
+          "Originator Onboarding"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/originator/onboarding/{id}": {
@@ -334,7 +518,9 @@
           }
         ],
         "summary": "Get onboarding data by originator ID",
-        "tags": ["Originator Onboarding"],
+        "tags": [
+          "Originator Onboarding"
+        ],
         "x-zuplo-route": {
           "corsPolicy": "none",
           "handler": {
@@ -346,7 +532,9 @@
           }
         },
         "policies": {
-          "inbound": ["api-key-inbound"]
+          "inbound": [
+            "api-key-inbound"
+          ]
         }
       }
     },
@@ -375,7 +563,24 @@
           }
         ],
         "summary": "Get presigned URL for file upload",
-        "tags": ["Originator Onboarding"]
+        "tags": [
+          "Originator Onboarding"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/originator/admin/{id}": {
@@ -403,7 +608,24 @@
           }
         ],
         "summary": "Delete originator",
-        "tags": ["Originator - Admin"]
+        "tags": [
+          "Originator - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       },
       "put": {
         "operationId": "OriginatorAdminController_updateOriginator",
@@ -469,7 +691,24 @@
           }
         ],
         "summary": "Update originator",
-        "tags": ["Originator - Admin"]
+        "tags": [
+          "Originator - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/originator/admin/invitation": {
@@ -531,7 +770,24 @@
           }
         ],
         "summary": "Send originator invitation",
-        "tags": ["Originator - Admin"]
+        "tags": [
+          "Originator - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/originator/admin/all": {
@@ -586,7 +842,24 @@
           }
         ],
         "summary": "Get all originators",
-        "tags": ["Originator - Admin"]
+        "tags": [
+          "Originator - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/originator/admin/bulk/invitation": {
@@ -625,7 +898,24 @@
           }
         ],
         "summary": "Send bulk originator invitations",
-        "tags": ["Originator - Admin"]
+        "tags": [
+          "Originator - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/originator/admin/{id}/status": {
@@ -669,7 +959,9 @@
                     "maxLength": 500
                   }
                 },
-                "required": ["status"]
+                "required": [
+                  "status"
+                ]
               }
             }
           }
@@ -752,7 +1044,24 @@
           }
         ],
         "summary": "Update originator status",
-        "tags": ["Originator - Admin"]
+        "tags": [
+          "Originator - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/originator/onboarding/admin/league": {
@@ -787,7 +1096,24 @@
           }
         ],
         "summary": "Get all leagues",
-        "tags": ["Originator Onboarding - Admin"]
+        "tags": [
+          "Originator Onboarding - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/originator/onboarding/admin/league/create": {
@@ -818,7 +1144,11 @@
                     "example": "123456"
                   }
                 },
-                "required": ["name", "email", "state"]
+                "required": [
+                  "name",
+                  "email",
+                  "state"
+                ]
               }
             }
           }
@@ -834,7 +1164,24 @@
           }
         ],
         "summary": "Create league",
-        "tags": ["Originator Onboarding - Admin"]
+        "tags": [
+          "Originator Onboarding - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/s3/presigned-url": {
@@ -854,7 +1201,9 @@
                     "description": "Name of the file to generate a presigned URL for"
                   }
                 },
-                "required": ["fileName"]
+                "required": [
+                  "fileName"
+                ]
               }
             }
           }
@@ -870,7 +1219,24 @@
           }
         ],
         "summary": "Get a presigned URL for file download",
-        "tags": ["s3"]
+        "tags": [
+          "s3"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/s3/presigned-url/upload": {
@@ -895,7 +1261,10 @@
                     "description": "MIME type of the file"
                   }
                 },
-                "required": ["fileName", "fileType"]
+                "required": [
+                  "fileName",
+                  "fileType"
+                ]
               }
             }
           }
@@ -911,7 +1280,24 @@
           }
         ],
         "summary": "Get a presigned URL for file upload",
-        "tags": ["s3"]
+        "tags": [
+          "s3"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/s3/read/stream/{fileName}": {
@@ -940,7 +1326,24 @@
           }
         ],
         "summary": "Stream a file from S3",
-        "tags": ["s3"]
+        "tags": [
+          "s3"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/investor/dashboard": {
@@ -957,7 +1360,24 @@
             "clerk-token": []
           }
         ],
-        "tags": ["Investor"]
+        "tags": [
+          "Investor"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/investor/onboarding": {
@@ -985,7 +1405,24 @@
           }
         ],
         "summary": "Create Investor Onboarding Data",
-        "tags": ["Investor"]
+        "tags": [
+          "Investor"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       },
       "get": {
         "operationId": "InvestorController_getOnboardingDetails",
@@ -1001,7 +1438,24 @@
           }
         ],
         "summary": "Reterive investor onboarding details.",
-        "tags": ["Investor"]
+        "tags": [
+          "Investor"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/investor/me": {
@@ -1019,7 +1473,24 @@
           }
         ],
         "summary": "Get onboarding data for current investor",
-        "tags": ["Investor"]
+        "tags": [
+          "Investor"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       },
       "put": {
         "operationId": "InvestorController_updateMyOnboardingData",
@@ -1035,7 +1506,24 @@
           }
         ],
         "summary": "Update onboarding data for current investor",
-        "tags": ["Investor"]
+        "tags": [
+          "Investor"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/investor/proof-of-authorization": {
@@ -1058,7 +1546,10 @@
                     "example": "https://example.com/file.pdf"
                   }
                 },
-                "required": ["documentName", "file"]
+                "required": [
+                  "documentName",
+                  "file"
+                ]
               }
             }
           }
@@ -1074,7 +1565,24 @@
           }
         ],
         "summary": "Add proof of authorization document",
-        "tags": ["Investor"]
+        "tags": [
+          "Investor"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/investor/{id}": {
@@ -1119,7 +1627,24 @@
           }
         ],
         "summary": "Get investor by investor id.",
-        "tags": ["Investor"]
+        "tags": [
+          "Investor"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/investor/admin/invitation": {
@@ -1173,7 +1698,24 @@
           }
         ],
         "summary": "Send investor invitation",
-        "tags": ["Investor - Admin"]
+        "tags": [
+          "Investor - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/investor/admin/options": {
@@ -1220,7 +1762,24 @@
           }
         ],
         "summary": "Get investor options (id and name only)",
-        "tags": ["Investor - Admin"]
+        "tags": [
+          "Investor - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/investor/admin/all": {
@@ -1275,7 +1834,24 @@
           }
         ],
         "summary": "Get all investors",
-        "tags": ["Investor - Admin"]
+        "tags": [
+          "Investor - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/investor/admin/application/{id}": {
@@ -1320,7 +1896,24 @@
           }
         ],
         "summary": "Update the onboarding application is status",
-        "tags": ["Investor - Admin"]
+        "tags": [
+          "Investor - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/investor/admin/{id}": {
@@ -1346,7 +1939,24 @@
             "clerk-token": []
           }
         ],
-        "tags": ["Investor - Admin"]
+        "tags": [
+          "Investor - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/investor/admin/onboarding-data/{id}": {
@@ -1391,7 +2001,24 @@
           }
         ],
         "summary": "Update the investor onboarding data.",
-        "tags": ["Investor - Admin"]
+        "tags": [
+          "Investor - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/docusign/onboarding/{type}": {
@@ -1412,7 +2039,24 @@
             "description": ""
           }
         },
-        "tags": ["Docusign"]
+        "tags": [
+          "Docusign"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/docusign/send/documents": {
@@ -1435,7 +2079,24 @@
           }
         },
         "summary": "Send documents for signing.",
-        "tags": ["Docusign"]
+        "tags": [
+          "Docusign"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/docusign/documents": {
@@ -1448,7 +2109,24 @@
           }
         },
         "summary": "List of documents for signing",
-        "tags": ["Docusign"]
+        "tags": [
+          "Docusign"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/docusign/process/webhook": {
@@ -1471,7 +2149,24 @@
           }
         },
         "summary": "Document signing webhook",
-        "tags": ["Docusign"]
+        "tags": [
+          "Docusign"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/docusign/envelope/{envelopeId}": {
@@ -1503,7 +2198,24 @@
           }
         },
         "summary": "Get envelope for embedded signing",
-        "tags": ["Docusign"]
+        "tags": [
+          "Docusign"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       },
       "get": {
         "operationId": "DocusignController_getEvelopeSenderViewById",
@@ -1533,7 +2245,24 @@
           }
         },
         "summary": "Get envelope for sender view",
-        "tags": ["Docusign"]
+        "tags": [
+          "Docusign"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/docusign/envelope/{envelopeId}/download": {
@@ -1565,7 +2294,24 @@
           }
         },
         "summary": "Download envelope document",
-        "tags": ["Docusign"]
+        "tags": [
+          "Docusign"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/docusign/send/notification": {
@@ -1597,7 +2343,24 @@
           }
         },
         "summary": "Resend document notification. by envelope id",
-        "tags": ["Docusign"]
+        "tags": [
+          "Docusign"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/deal": {
@@ -1625,7 +2388,24 @@
           }
         ],
         "summary": "Create a new deal request",
-        "tags": ["Deals"]
+        "tags": [
+          "Deals"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       },
       "get": {
         "operationId": "DealController_listDeals",
@@ -1696,7 +2476,24 @@
           }
         ],
         "summary": "Get list of originator deal requests",
-        "tags": ["Deals"]
+        "tags": [
+          "Deals"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/deal/update/{id}": {
@@ -1733,7 +2530,24 @@
           }
         ],
         "summary": "Update a deal request",
-        "tags": ["Deals"]
+        "tags": [
+          "Deals"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/deal/{id}": {
@@ -1761,7 +2575,24 @@
           }
         ],
         "summary": "Get deal request by ID",
-        "tags": ["Deals"]
+        "tags": [
+          "Deals"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       },
       "delete": {
         "operationId": "DealController_deleteDealById",
@@ -1787,7 +2618,24 @@
           }
         ],
         "summary": "Delete a deal request by ID",
-        "tags": ["Deals"]
+        "tags": [
+          "Deals"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/deal/quality-report/{id}": {
@@ -1815,7 +2663,24 @@
           }
         ],
         "summary": "Get deal quality report by deal id",
-        "tags": ["Deals"]
+        "tags": [
+          "Deals"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/deal/upload-url": {
@@ -1843,7 +2708,24 @@
           }
         ],
         "summary": "Get presigned URL for file upload",
-        "tags": ["Deals"]
+        "tags": [
+          "Deals"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/deal/file": {
@@ -1871,7 +2753,24 @@
           }
         ],
         "summary": "Add file information to deal request",
-        "tags": ["Deals"]
+        "tags": [
+          "Deals"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/deal/mark/in-review": {
@@ -1899,7 +2798,24 @@
           }
         ],
         "summary": "Update the originator status to in review",
-        "tags": ["Deals"]
+        "tags": [
+          "Deals"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/deal/{id}/complete": {
@@ -1927,7 +2843,24 @@
           }
         ],
         "summary": "Complete deal request submission",
-        "tags": ["Deals"]
+        "tags": [
+          "Deals"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/deal/{id}/status": {
@@ -1965,7 +2898,24 @@
           }
         ],
         "summary": "Change deal request status (originator)",
-        "tags": ["Deals"]
+        "tags": [
+          "Deals"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/deal/{id}/cancel": {
@@ -1999,7 +2949,24 @@
           }
         ],
         "summary": "Cancel a deal request",
-        "tags": ["Deals"]
+        "tags": [
+          "Deals"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/deal/files/{id}": {
@@ -2027,7 +2994,24 @@
           }
         ],
         "summary": "Get files and analysis by deal request ID",
-        "tags": ["Deals"]
+        "tags": [
+          "Deals"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/deal/securitized/documents/{securitizedDealId}": {
@@ -2054,7 +3038,24 @@
           }
         ],
         "summary": "Get all signed documents",
-        "tags": ["Deals"]
+        "tags": [
+          "Deals"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/deal/marketplace/listing": {
@@ -2072,7 +3073,24 @@
           }
         ],
         "summary": "Get marketplace deal requests with status filters",
-        "tags": ["Deals"]
+        "tags": [
+          "Deals"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/deal/investor-interest": {
@@ -2100,7 +3118,24 @@
           }
         ],
         "summary": "Create investor interest for a deal",
-        "tags": ["Deals"]
+        "tags": [
+          "Deals"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/deal/debug/statuses": {
@@ -2118,7 +3153,24 @@
           }
         ],
         "summary": "Debug: Get all available statuses",
-        "tags": ["Deals"]
+        "tags": [
+          "Deals"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/deal/assets-types/all": {
@@ -2136,7 +3188,24 @@
           }
         ],
         "summary": "Get all asset types",
-        "tags": ["Deals"]
+        "tags": [
+          "Deals"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/deal/admin/all": {
@@ -2209,7 +3278,24 @@
           }
         ],
         "summary": "Get list of all deal requests",
-        "tags": ["Deals - Admin"]
+        "tags": [
+          "Deals - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/deal/admin/price/guide/{id}": {
@@ -2243,7 +3329,24 @@
           }
         ],
         "summary": "Create Price Guide",
-        "tags": ["Deals - Admin"]
+        "tags": [
+          "Deals - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/deal/admin/stratification/analysis/{dealRequestId}": {
@@ -2283,7 +3386,24 @@
           }
         ],
         "summary": "Fetch stratification analysis by deal request id",
-        "tags": ["Deals - Admin"]
+        "tags": [
+          "Deals - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/deal/admin/{id}": {
@@ -2311,7 +3431,24 @@
           }
         ],
         "summary": "Delete a deal request by ID (admin only)",
-        "tags": ["Deals - Admin"]
+        "tags": [
+          "Deals - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/deal/admin/{id}/status": {
@@ -2349,7 +3486,24 @@
           }
         ],
         "summary": "Update deal request status (admin only)",
-        "tags": ["Deals - Admin"]
+        "tags": [
+          "Deals - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/deal/admin/assets-types/all": {
@@ -2367,7 +3521,24 @@
           }
         ],
         "summary": "Get all asset types",
-        "tags": ["Deals - Admin"]
+        "tags": [
+          "Deals - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/loan-stratification/validate/tape": {
@@ -2392,7 +3563,24 @@
             "description": ""
           }
         },
-        "tags": ["LoanStratification"]
+        "tags": [
+          "LoanStratification"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/leads/create": {
@@ -2429,7 +3617,24 @@
           }
         },
         "summary": "Submit a new lead",
-        "tags": ["Leads"]
+        "tags": [
+          "Leads"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/leads": {
@@ -2461,7 +3666,24 @@
           }
         },
         "summary": "Get all leads (Admin only)",
-        "tags": ["Leads"]
+        "tags": [
+          "Leads"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/leads/admin/{id}": {
@@ -2489,7 +3711,24 @@
           }
         ],
         "summary": "Delete a lead (Admin only)",
-        "tags": ["LeadsAdmin"]
+        "tags": [
+          "LeadsAdmin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/claude/analyze-file": {
@@ -2597,7 +3836,24 @@
           }
         ],
         "summary": "Generate Claude AI analysis for a single file",
-        "tags": ["Claude"]
+        "tags": [
+          "Claude"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/claude/ai-summary/securitization": {
@@ -2701,7 +3957,24 @@
           }
         ],
         "summary": "Generate AI summary for a live securitization deal",
-        "tags": ["Claude"]
+        "tags": [
+          "Claude"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/claude/ai-summary/deal-request": {
@@ -2809,7 +4082,24 @@
           }
         ],
         "summary": "Generate AI summary for a deal request in progress",
-        "tags": ["Claude"]
+        "tags": [
+          "Claude"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/financial-information/originators/{originatorClerkId}/banking": {
@@ -2875,7 +4165,24 @@
           }
         },
         "summary": "Create or update banking details for an originator",
-        "tags": ["FinancialInformation"]
+        "tags": [
+          "FinancialInformation"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/financial-information/originators/{originatorId}/banking": {
@@ -2938,7 +4245,24 @@
           }
         },
         "summary": "Update existing banking details for an originator",
-        "tags": ["FinancialInformation"]
+        "tags": [
+          "FinancialInformation"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/financial-information/originators/{originatorId}": {
@@ -2961,7 +4285,24 @@
           }
         },
         "summary": "Get financial information for an originator",
-        "tags": ["FinancialInformation"]
+        "tags": [
+          "FinancialInformation"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/securitization": {
@@ -3061,7 +4402,24 @@
           }
         ],
         "summary": "Get all securitizations",
-        "tags": ["Securitization"]
+        "tags": [
+          "Securitization"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/securitization/quality-report/{id}": {
@@ -3089,7 +4447,24 @@
           }
         ],
         "summary": "Get securitize deal quality report by id.",
-        "tags": ["Securitization"]
+        "tags": [
+          "Securitization"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/securitization/{id}": {
@@ -3117,7 +4492,24 @@
           }
         ],
         "summary": "Get a securitization by ID",
-        "tags": ["Securitization"]
+        "tags": [
+          "Securitization"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/securitization/deal/signing-status/{id}": {
@@ -3145,7 +4537,24 @@
           }
         ],
         "summary": "Securitization deal signing status",
-        "tags": ["Securitization"]
+        "tags": [
+          "Securitization"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/securitization/{id}/status": {
@@ -3173,7 +4582,24 @@
           }
         ],
         "summary": "Get securitization deal latest status",
-        "tags": ["Securitization"]
+        "tags": [
+          "Securitization"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/securitization/{id}/investors-with-trades": {
@@ -3236,7 +4662,24 @@
           }
         ],
         "summary": "Get investors with trades for securitization deal",
-        "tags": ["Securitization"]
+        "tags": [
+          "Securitization"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/securitization/admin": {
@@ -3264,7 +4707,24 @@
           }
         ],
         "summary": "Submit a new Securitization",
-        "tags": ["SecuritizationAdmin"]
+        "tags": [
+          "SecuritizationAdmin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/securitization/admin/{id}": {
@@ -3302,7 +4762,24 @@
           }
         ],
         "summary": "Update a Securitization",
-        "tags": ["SecuritizationAdmin"]
+        "tags": [
+          "SecuritizationAdmin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       },
       "delete": {
         "operationId": "SecuritizationAdminController_deleteSecuritization",
@@ -3328,7 +4805,24 @@
           }
         ],
         "summary": "Delete a Securitization (Admin only)",
-        "tags": ["SecuritizationAdmin"]
+        "tags": [
+          "SecuritizationAdmin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/securitization/admin/{id}/tranches": {
@@ -3367,7 +4861,24 @@
           }
         ],
         "summary": "Create and fetch tranches",
-        "tags": ["SecuritizationAdmin"]
+        "tags": [
+          "SecuritizationAdmin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/securitization/admin/{id}/stratification-analysis": {
@@ -3395,7 +4906,24 @@
           }
         ],
         "summary": "Get combined stratification analysis",
-        "tags": ["SecuritizationAdmin"]
+        "tags": [
+          "SecuritizationAdmin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/securitization/admin/cusip-code/{id}": {
@@ -3433,7 +4961,24 @@
           }
         ],
         "summary": "Save CUSIP and generate documents for signing",
-        "tags": ["SecuritizationAdmin"]
+        "tags": [
+          "SecuritizationAdmin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/securitization/admin/deal/close/{id}": {
@@ -3471,7 +5016,24 @@
           }
         ],
         "summary": "Close securitize deal so it would be visible to investors",
-        "tags": ["SecuritizationAdmin"]
+        "tags": [
+          "SecuritizationAdmin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/securitization/admin/{id}/status": {
@@ -3497,10 +5059,17 @@
                 "properties": {
                   "status": {
                     "type": "string",
-                    "enum": ["DRAFT", "SIGN_PENDING", "SIGNED", "CLOSED"]
+                    "enum": [
+                      "DRAFT",
+                      "SIGN_PENDING",
+                      "SIGNED",
+                      "CLOSED"
+                    ]
                   }
                 },
-                "required": ["status"]
+                "required": [
+                  "status"
+                ]
               }
             }
           }
@@ -3516,7 +5085,24 @@
           }
         ],
         "summary": "Change securitization deal status (Admin only)",
-        "tags": ["SecuritizationAdmin"]
+        "tags": [
+          "SecuritizationAdmin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/securitization/admin/{id}/anchor-investor": {
@@ -3554,7 +5140,24 @@
           }
         ],
         "summary": "Manage anchor investor for securitization deal (Admin only)",
-        "tags": ["SecuritizationAdmin"]
+        "tags": [
+          "SecuritizationAdmin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/securitization/admin/pools/{assetId}": {
@@ -3582,7 +5185,24 @@
           }
         ],
         "summary": "Get securitizable pools",
-        "tags": ["SecuritizationAdmin"]
+        "tags": [
+          "SecuritizationAdmin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/w9form/save": {
@@ -3617,7 +5237,24 @@
           }
         ],
         "summary": "Create or update a W9Form (upsert)",
-        "tags": ["W9Form"]
+        "tags": [
+          "W9Form"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/w9form": {
@@ -3642,7 +5279,24 @@
           }
         ],
         "summary": "Get my W9Form",
-        "tags": ["W9Form"]
+        "tags": [
+          "W9Form"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/w9form/update-signing-status": {
@@ -3660,7 +5314,24 @@
           }
         ],
         "summary": "Update W9Form signing status",
-        "tags": ["W9Form"]
+        "tags": [
+          "W9Form"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/w9form/docusign-url": {
@@ -3678,7 +5349,24 @@
           }
         ],
         "summary": "Get DocuSign URL for W9Form signing",
-        "tags": ["W9Form"]
+        "tags": [
+          "W9Form"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/w9form/{id}": {
@@ -3713,7 +5401,24 @@
           }
         ],
         "summary": "Get W9Form by ID",
-        "tags": ["W9Form"]
+        "tags": [
+          "W9Form"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       },
       "delete": {
         "operationId": "W9FormController_remove",
@@ -3739,7 +5444,24 @@
           }
         ],
         "summary": "Delete W9Form by ID",
-        "tags": ["W9Form"]
+        "tags": [
+          "W9Form"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/change-request": {
@@ -3763,7 +5485,24 @@
           }
         },
         "summary": "Submit a change request for onboarding data (investor or originator)",
-        "tags": ["ChangeRequest"]
+        "tags": [
+          "ChangeRequest"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/change-request/current-user": {
@@ -3779,7 +5518,24 @@
           }
         },
         "summary": "Get pending change request for the currently logged-in user",
-        "tags": ["ChangeRequest"]
+        "tags": [
+          "ChangeRequest"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/change-request/current-user/latest": {
@@ -3795,7 +5551,24 @@
           }
         },
         "summary": "Get latest change request for the currently logged-in user (any status)",
-        "tags": ["ChangeRequest"]
+        "tags": [
+          "ChangeRequest"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/change-request/current-user/can-submit": {
@@ -3808,7 +5581,24 @@
           }
         },
         "summary": "Check if user can submit a new change request (24-hour restriction)",
-        "tags": ["ChangeRequest"]
+        "tags": [
+          "ChangeRequest"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/change-request/admin/investors": {
@@ -3826,7 +5616,24 @@
           }
         ],
         "summary": "Get all investors (admin)",
-        "tags": ["ChangeRequest - Admin"]
+        "tags": [
+          "ChangeRequest - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/change-request/admin/originators": {
@@ -3844,7 +5651,24 @@
           }
         ],
         "summary": "Get all originators (admin)",
-        "tags": ["ChangeRequest - Admin"]
+        "tags": [
+          "ChangeRequest - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/change-request/admin/{id}/approve": {
@@ -3872,7 +5696,24 @@
           }
         ],
         "summary": "Approve all pending change requests for an investor/originator",
-        "tags": ["ChangeRequest - Admin"]
+        "tags": [
+          "ChangeRequest - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/change-request/admin/{id}/reject-changes": {
@@ -3911,7 +5752,24 @@
           }
         ],
         "summary": "Reject all pending change requests for an investor/originator",
-        "tags": ["ChangeRequest - Admin"]
+        "tags": [
+          "ChangeRequest - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/change-request/admin": {
@@ -3946,7 +5804,24 @@
           }
         ],
         "summary": "Get all change requests for a given originator or investor (admin)",
-        "tags": ["ChangeRequest - Admin"]
+        "tags": [
+          "ChangeRequest - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/change-request/admin/investor/{id}": {
@@ -3977,7 +5852,24 @@
           }
         ],
         "summary": "Get investor by ID from change-request table",
-        "tags": ["ChangeRequest - Admin"]
+        "tags": [
+          "ChangeRequest - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/change-request/admin/originator/{id}": {
@@ -4008,7 +5900,24 @@
           }
         ],
         "summary": "Get originator by ID from change-request table",
-        "tags": ["ChangeRequest - Admin"]
+        "tags": [
+          "ChangeRequest - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/trade": {
@@ -4036,7 +5945,24 @@
           }
         ],
         "summary": "Create a new primary trade",
-        "tags": ["Trades"]
+        "tags": [
+          "Trades"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/trade/{id}": {
@@ -4074,7 +6000,24 @@
           }
         ],
         "summary": "Update an existing trade",
-        "tags": ["Trades"]
+        "tags": [
+          "Trades"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       },
       "get": {
         "operationId": "TradeController_getTradeById",
@@ -4100,7 +6043,24 @@
           }
         ],
         "summary": "Get trade by ID",
-        "tags": ["Trades"]
+        "tags": [
+          "Trades"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       },
       "delete": {
         "operationId": "TradeController_deleteTrade",
@@ -4126,7 +6086,24 @@
           }
         ],
         "summary": "Delete a trade",
-        "tags": ["Trades"]
+        "tags": [
+          "Trades"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/trade/user/my-trades": {
@@ -4144,7 +6121,24 @@
           }
         ],
         "summary": "Get paginated list of user trades",
-        "tags": ["Trades"]
+        "tags": [
+          "Trades"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/trade/securitization/{securitizationDealId}/investor-check": {
@@ -4175,7 +6169,24 @@
           }
         ],
         "summary": "Check if investor has existing trade for securitization deal",
-        "tags": ["Trades"]
+        "tags": [
+          "Trades"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/trade/{id}/status": {
@@ -4213,7 +6224,24 @@
           }
         ],
         "summary": "Update trade status",
-        "tags": ["Trades"]
+        "tags": [
+          "Trades"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/trade/admin/create": {
@@ -4241,7 +6269,24 @@
           }
         ],
         "summary": "Create a new trade for a specific investor (Admin only)",
-        "tags": ["Trades - Admin"]
+        "tags": [
+          "Trades - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/trade/admin/all": {
@@ -4259,7 +6304,24 @@
           }
         ],
         "summary": "Get paginated list of all trades (admin)",
-        "tags": ["Trades - Admin"]
+        "tags": [
+          "Trades - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/trade/admin/{id}/status": {
@@ -4297,7 +6359,24 @@
           }
         ],
         "summary": "Update trade status",
-        "tags": ["Trades - Admin"]
+        "tags": [
+          "Trades - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/trade/admin/{id}/status-history": {
@@ -4325,7 +6404,24 @@
           }
         ],
         "summary": "Get trade status history",
-        "tags": ["Trades - Admin"]
+        "tags": [
+          "Trades - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/trade/admin/securitization/{securitizationDealId}": {
@@ -4374,7 +6470,10 @@
             "in": "query",
             "description": "Filter by trade mode",
             "schema": {
-              "enum": ["TRADITIONAL", "TOKENIZED"],
+              "enum": [
+                "TRADITIONAL",
+                "TOKENIZED"
+              ],
               "type": "string"
             }
           },
@@ -4428,7 +6527,24 @@
           }
         ],
         "summary": "Get trades by securitization deal ID",
-        "tags": ["Trades - Admin"]
+        "tags": [
+          "Trades - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/trade/admin/{id}/confirm-allocation": {
@@ -4469,7 +6585,24 @@
           }
         ],
         "summary": "Confirm trade allocation and update allocated quantity (Anchor investors only)",
-        "tags": ["Trades - Admin"]
+        "tags": [
+          "Trades - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/trade/admin/{id}/cancel-allocation": {
@@ -4510,7 +6643,24 @@
           }
         ],
         "summary": "Cancel trade allocation (Anchor investors only)",
-        "tags": ["Trades - Admin"]
+        "tags": [
+          "Trades - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/trade/admin/{id}/update-quantity": {
@@ -4551,7 +6701,24 @@
           }
         ],
         "summary": "Update trade quantity without changing status (Anchor investors only)",
-        "tags": ["Trades - Admin"]
+        "tags": [
+          "Trades - Admin"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/platform-settings/third-party/emails": {
@@ -4599,7 +6766,24 @@
           }
         ],
         "summary": "Get third-party emails (trustee and master servicer)",
-        "tags": ["Platform Settings"]
+        "tags": [
+          "Platform Settings"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       },
       "put": {
         "operationId": "PlatformSettingsController_updateThirdPartyEmails",
@@ -4666,7 +6850,24 @@
           }
         ],
         "summary": "Update third-party emails",
-        "tags": ["Platform Settings"]
+        "tags": [
+          "Platform Settings"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     },
     "/api/giact/status/{referenceId}": {
@@ -4720,7 +6921,24 @@
           }
         ],
         "summary": "Get verification status",
-        "tags": ["Business Verification"]
+        "tags": [
+          "Business Verification"
+        ],
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "$env(BASE_URL)"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-inbound"
+            ]
+          }
+        }
       }
     }
   },
@@ -4853,7 +7071,9 @@
             "additionalProperties": true
           }
         },
-        "required": ["onboardingData"]
+        "required": [
+          "onboardingData"
+        ]
       },
       "RejectChangeRequestDto": {
         "type": "object",
@@ -4954,7 +7174,10 @@
             "type": "string",
             "description": "Account type",
             "example": "savings",
-            "enum": ["checking", "savings"]
+            "enum": [
+              "checking",
+              "savings"
+            ]
           },
           "checkAmount": {
             "type": "number",
@@ -5054,7 +7277,10 @@
             ]
           }
         },
-        "required": ["businessName", "address"]
+        "required": [
+          "businessName",
+          "address"
+        ]
       },
       "VerificationOptionsDto": {
         "type": "object",
@@ -5133,12 +7359,20 @@
           "verificationLevel": {
             "type": "string",
             "example": "FULL",
-            "enum": ["NONE", "PARTIAL", "FULL"]
+            "enum": [
+              "NONE",
+              "PARTIAL",
+              "FULL"
+            ]
           },
           "riskLevel": {
             "type": "string",
             "example": "LOW",
-            "enum": ["LOW", "MEDIUM", "HIGH"]
+            "enum": [
+              "LOW",
+              "MEDIUM",
+              "HIGH"
+            ]
           },
           "details": {
             "$ref": "#/components/schemas/BusinessDetailsDto"
@@ -5172,7 +7406,12 @@
             "example": "Account Verified - Checking Account"
           }
         },
-        "required": ["verified", "bankName", "accountType", "status"]
+        "required": [
+          "verified",
+          "bankName",
+          "accountType",
+          "status"
+        ]
       },
       "ComplianceResultDto": {
         "type": "object",
@@ -5193,7 +7432,11 @@
             }
           }
         },
-        "required": ["ofacClear", "sanctionsFound", "riskFlags"]
+        "required": [
+          "ofacClear",
+          "sanctionsFound",
+          "riskFlags"
+        ]
       },
       "MetadataDto": {
         "type": "object",
@@ -5205,14 +7448,21 @@
           "environment": {
             "type": "string",
             "example": "sandbox",
-            "enum": ["sandbox", "production"]
+            "enum": [
+              "sandbox",
+              "production"
+            ]
           },
           "apiVersion": {
             "type": "string",
             "example": "v5.8"
           }
         },
-        "required": ["processingTimeMs", "environment", "apiVersion"]
+        "required": [
+          "processingTimeMs",
+          "environment",
+          "apiVersion"
+        ]
       },
       "ErrorDetailsDto": {
         "type": "object",
@@ -5230,7 +7480,11 @@
             "example": "Please provide a valid business name"
           }
         },
-        "required": ["code", "message", "suggestion"]
+        "required": [
+          "code",
+          "message",
+          "suggestion"
+        ]
       },
       "VerificationResponseDto": {
         "type": "object",
