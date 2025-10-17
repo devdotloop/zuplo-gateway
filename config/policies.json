@@ -2,14 +2,14 @@
   "policies": [
     {
       "handler": {
-        "export": "MockApiInboundPolicy",
+        "export": "ApiKeyInboundPolicy",
         "module": "$import(@zuplo/runtime)",
         "options": {
           "allowUnauthenticatedRequests": false
         }
       },
-      "name": "mock-api-inbound",
-      "policyType": "mock-api-inbound"
+      "name": "api-key-inbound",
+      "policyType": "api-key-inbound"
     },
     {
       "handler": {
