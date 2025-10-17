@@ -18,8 +18,7 @@
         "options": {
           "issuer": "https://organic-gopher-60.clerk.accounts.dev",
           "jwkUrl": "https://organic-gopher-60.clerk.accounts.dev/.well-known/jwks.json",
-          "audience": "https://your-api-audience.com",
-          "allowUnauthenticatedRequests": false
+          "allowUnauthenticatedRequests": true
         }
       },
       "name": "clerk-jwt-auth-inbound",
