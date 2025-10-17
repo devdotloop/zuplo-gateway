@@ -96,7 +96,7 @@
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "baseUrl": "$env(BACKEND_URL)"
+              "baseUrl": "$env(BASE_URL)"
             }
           },
           "policies": {
