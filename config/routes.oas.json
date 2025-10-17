@@ -100,7 +100,7 @@
             }
           },
           "policies": {
-            "inbound": ["clerk-jwt-auth-inbound"]
+            "inbound": ["api-key-inbound"]
           }
         },
         "summary": "Get all available charter numbers",
