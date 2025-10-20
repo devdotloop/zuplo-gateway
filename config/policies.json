@@ -24,6 +24,15 @@
       },
       "name": "clerk-jwt-auth-inbound",
       "policyType": "openid-jwt-auth-inbound"
+    },
+    {
+      "name": "inject-user-headers",
+      "policyType": "request-handler",
+      "handler": {
+        "export": "default",
+        "module": "$import(./modules/inject-user-headers)",
+        "options": {}
+      }
     }
   ]
 }
