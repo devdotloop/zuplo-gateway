@@ -11,7 +11,7 @@ const configPath = path.join(__dirname, '../config/routes.oas.json');
 const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 
 // Your backend URL
-const BACKEND_URL = "https://dev-api.9squid.com";
+const BACKEND_URL = "https://0811ec280b29.ngrok-free.app";
 
 let updatedCount = 0;
 
