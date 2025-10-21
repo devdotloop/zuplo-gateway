@@ -185,7 +185,6 @@
               "baseUrl": "https://dev-api.9squid.com"
             }
           },
-          "policies": {
             "inbound": [
               "api-key-inbound",
               "inject-user-headers"
@@ -6960,7 +6959,7 @@
         }
       }
     }
-  },
+  ,
   "info": {
     "title": "9squid API",
     "description": "The 9squid API documentation",
