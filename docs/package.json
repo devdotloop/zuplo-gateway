@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "zudoku dev --zuplo",
+    "local": "zudoku dev",
     "build": "zudoku build --zuplo"
   },
   "dependencies": {

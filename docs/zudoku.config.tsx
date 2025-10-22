@@ -1,4 +1,42 @@
 import type { ZudokuConfig } from "zudoku";
+// import { environment } from "@zuplo/runtime";
+
+const isLocal = process.env.ZUPLO_PUBLIC_NODE_ENV === "local";
+
+
+const apiKeys = isLocal ? undefined : {
+    enabled: true,
+    // @ts-ignore - deploymentName is a Zuplo-specific extension
+    deploymentName: process.env.ZUPLO_PUBLIC_DEPLOYMENT_NAME,
+    createKey: async ({ apiKey, context, auth }) => {
+      // process.env.ZUPLO_PUBLIC_SERVER_URL is only required for local development
+      // @ts-ignore - import.meta.env.ZUPLO_SERVER_URL is automatically set when using a deployed environment
+      const serverUrl = process.env.ZUPLO_PUBLIC_SERVER_URL || import.meta.env?.ZUPLO_SERVER_URL;
+
+      const createApiKeyRequest = new Request(serverUrl + "/v1/developer/api-key", {
+        method: "POST",
+        body: JSON.stringify({
+          ...apiKey,
+          email: auth.profile?.email,
+          metadata: {
+            userId: auth.profile?.sub,
+            name: auth.profile?.name,
+          },
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const createApiKey = await fetch(
+        await context.signRequest(createApiKeyRequest),
+      );
+
+      if (!createApiKey.ok) {
+        throw new Error("Could not create API Key");
+      }
+    }
+  }
 
 /**
  * Developer Portal Configuration
@@ -78,41 +116,9 @@ const config: ZudokuConfig = {
     type: "clerk",
     // Use environment variables
     clerkPubKey: 'pk_test_b3JnYW5pYy1nb3BoZXItNjAuY2xlcmsuYWNjb3VudHMuZGV2JA',//process.env.ZUPLO_PUBLIC_CLERK_PUBLISHABLE_KEY! as `pk_test_${string}`,
-    jwtTemplateName: 'zuplo-api',
+    jwtTemplateName: 'nest-backend-testing',
   },
-  apiKeys: {
-    enabled: true,
-    // @ts-ignore - deploymentName is a Zuplo-specific extension
-    deploymentName: process.env.ZUPLO_PUBLIC_DEPLOYMENT_NAME,
-    createKey: async ({ apiKey, context, auth }) => {
-      // process.env.ZUPLO_PUBLIC_SERVER_URL is only required for local development
-      // @ts-ignore - import.meta.env.ZUPLO_SERVER_URL is automatically set when using a deployed environment
-      const serverUrl = process.env.ZUPLO_PUBLIC_SERVER_URL || import.meta.env?.ZUPLO_SERVER_URL;
-
-      const createApiKeyRequest = new Request(serverUrl + "/v1/developer/api-key", {
-        method: "POST",
-        body: JSON.stringify({
-          ...apiKey,
-          email: auth.profile?.email,
-          metadata: {
-            userId: auth.profile?.sub,
-            name: auth.profile?.name,
-          },
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const createApiKey = await fetch(
-        await context.signRequest(createApiKeyRequest),
-      );
-
-      if (!createApiKey.ok) {
-        throw new Error("Could not create API Key");
-      }
-    },
-  },
+  apiKeys: apiKeys,
 };
 
 export default config;
